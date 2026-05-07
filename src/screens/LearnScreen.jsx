@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, GraduationCap, MessageSquare, Users, Star, ChevronRight, Home, TrendingUp, User, Trophy, BookOpen, X, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Flame, GraduationCap, MessageSquare, Users, Star, ChevronRight, Home, TrendingUp, User, Trophy, BookOpen, X, CheckCircle2, AlertCircle, Coins } from 'lucide-react';
 
 const LearnScreen = ({ onTabChange }) => {
   const [streak, setStreak] = React.useState(7);
-  const [quizState, setQuizState] = React.useState('start'); // start, active, feedback
+  const [showQuiz, setShowQuiz] = React.useState(false);
+  const [quizStep, setQuizStep] = React.useState('question'); // question, feedback
   const [feedback, setFeedback] = React.useState(null);
   
   const groups = [
@@ -13,28 +14,27 @@ const LearnScreen = ({ onTabChange }) => {
     { id: 3, name: 'Psychology & Trading', members: '2.4k', mentor: 'Dr. Anita', color: '#BA1A1A' },
   ];
 
-  const dailyQuiz = {
-    question: "If a stock's RSI is 85, what does this visual signal usually mean?",
-    visual: (
-      <div style={{ height: '60px', width: '100%', display: 'flex', alignItems: 'flex-end', gap: '4px', marginBottom: '16px' }}>
-        {[30, 45, 60, 75, 85].map((h, i) => (
-          <div key={i} style={{ flex: 1, height: `${h}%`, backgroundColor: i === 4 ? '#BA1A1A' : 'rgba(255,255,255,0.3)', borderRadius: '4px' }} />
-        ))}
-      </div>
-    ),
+  const simplifiedQuiz = {
+    question: "What is the 'Golden Rule' to make money in the stock market?",
     options: [
-      { id: 'a', text: 'Overbought: Price might drop soon', correct: true, explanation: "RSI above 70 means the stock has been bought too much recently. Like a rubber band stretched too far, it's likely to snap back (price drop) soon!" },
-      { id: 'b', text: 'Oversold: Great time to buy', correct: false, explanation: "Actually, 'Oversold' is when RSI is below 30. At 85, the stock is 'Overbought'—people are too excited, and a correction is usually around the corner." },
-      { id: 'c', text: 'Neutral: No major change', correct: false, explanation: "Nope! Neutral is usually around 50. 85 is an extreme 'Overbought' signal, suggesting high heat in the market." }
+      { id: 'a', text: 'Buy High, Sell Low', correct: false, explanation: "Wait! If you buy something for ₹100 and sell it for ₹80, you lose ₹20. We want to do the opposite!" },
+      { id: 'b', text: 'Buy Low, Sell High', correct: true, explanation: "Exactly! Buy shares when they are cheap and sell them when they become expensive. This difference is your profit!" },
+      { id: 'c', text: 'Just keep money in the bank', correct: false, explanation: "Banks are safe, but stocks can help your money grow much faster over time if you're patient!" }
     ]
   };
 
   const handleOptionSelect = (option) => {
     setFeedback(option);
-    setQuizState('feedback');
+    setQuizStep('feedback');
     if (option.correct) {
       setStreak(prev => prev + 1);
     }
+  };
+
+  const closeQuiz = () => {
+    setShowQuiz(false);
+    setQuizStep('question');
+    setFeedback(null);
   };
 
   return (
@@ -44,7 +44,7 @@ const LearnScreen = ({ onTabChange }) => {
       animate={{ opacity: 1 }}
       style={{ backgroundColor: 'var(--md-sys-color-surface)', padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
     >
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '100px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '100px', filter: showQuiz ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}>
         {/* Header with Streak */}
         <header style={{ 
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
@@ -64,92 +64,40 @@ const LearnScreen = ({ onTabChange }) => {
         </header>
 
         <div style={{ padding: '0 20px' }}>
-          {/* Daily Quiz Hero - Interactive */}
+          {/* Daily Quiz Hero Card */}
           <motion.div 
-            layout
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setShowQuiz(true)}
             style={{ 
-              backgroundColor: quizState === 'feedback' && feedback?.correct ? '#1B5E20' : quizState === 'feedback' && !feedback?.correct ? '#BA1A1A' : 'var(--md-sys-color-primary)', 
+              backgroundColor: 'var(--md-sys-color-primary)', 
               borderRadius: '28px', padding: '24px', marginBottom: '24px',
               color: 'white', position: 'relative', overflow: 'hidden',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
-              transition: 'background-color 0.4s ease'
+              boxShadow: '0 8px 32px rgba(103, 80, 164, 0.25)',
+              cursor: 'pointer'
             }}
           >
-            <AnimatePresence mode="wait">
-              {quizState === 'start' && (
-                <motion.div key="start" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', opacity: 0.9 }}>
-                    <Trophy size={16} />
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Daily Challenge</span>
-                  </div>
-                  <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '8px' }}>Test Your Market Sense</h2>
-                  <p style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '20px', maxWidth: '200px' }}>
-                    Keep your {streak} day streak alive!
-                  </p>
-                  <button 
-                    onClick={() => setQuizState('active')}
-                    style={{ 
-                      backgroundColor: 'white', color: 'var(--md-sys-color-primary)', 
-                      padding: '10px 24px', borderRadius: '100px', fontWeight: 700, fontSize: '0.85rem'
-                    }}
-                  >
-                    Start Quiz (+50 🪙)
-                  </button>
-                </motion.div>
-              )}
-
-              {quizState === 'active' && (
-                <motion.div key="active" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '16px' }}>{dailyQuiz.question}</h3>
-                  {dailyQuiz.visual}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {dailyQuiz.options.map(opt => (
-                      <button 
-                        key={opt.id}
-                        onClick={() => handleOptionSelect(opt)}
-                        style={{ 
-                          backgroundColor: 'rgba(255,255,255,0.15)', padding: '12px 16px', 
-                          borderRadius: '16px', color: 'white', textAlign: 'left',
-                          fontSize: '0.9rem', border: '1px solid rgba(255,255,255,0.2)'
-                        }}
-                      >
-                        {opt.text}
-                      </button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {quizState === 'feedback' && (
-                <motion.div key="feedback" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                    {feedback.correct ? <CheckCircle2 size={32} /> : <AlertCircle size={32} />}
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700 }}>{feedback.correct ? 'Spot on!' : 'Not quite...'}</h3>
-                  </div>
-                  <div style={{ backgroundColor: 'rgba(255,255,255,0.2)', padding: '16px', borderRadius: '16px', marginBottom: '20px' }}>
-                    <p style={{ fontSize: '0.95rem', lineHeight: 1.5 }}>{feedback.explanation}</p>
-                  </div>
-                  <button 
-                    onClick={() => { setQuizState('start'); setFeedback(null); }}
-                    style={{ 
-                      backgroundColor: 'white', color: feedback.correct ? '#1B5E20' : '#BA1A1A', 
-                      padding: '10px 24px', borderRadius: '100px', fontWeight: 700, fontSize: '0.85rem'
-                    }}
-                  >
-                    Continue
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            
-            {quizState === 'start' && (
-              <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', opacity: 0.2, transform: 'rotate(-15deg)' }}>
-                <BookOpen size={140} strokeWidth={1} />
+            <div style={{ position: 'relative', zIndex: 2 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', opacity: 0.9 }}>
+                <Trophy size={16} />
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Daily Challenge</span>
               </div>
-            )}
+              <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '8px' }}>Today's Quick Quiz</h2>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '20px', maxWidth: '200px' }}>
+                Answer correctly to earn 50 🪙 and boost your streak!
+              </p>
+              <div style={{ 
+                backgroundColor: 'rgba(255,255,255,0.2)', display: 'inline-flex', padding: '8px 16px', borderRadius: '100px',
+                fontSize: '0.85rem', fontWeight: 600
+              }}>
+                Tap to Start
+              </div>
+            </div>
+            <div style={{ position: 'absolute', right: '-20px', bottom: '-20px', opacity: 0.2, transform: 'rotate(-15deg)' }}>
+              <Coins size={140} strokeWidth={1} />
+            </div>
           </motion.div>
 
-          {/* Ask a Mentor Card (Moved up) */}
+          {/* Ask a Mentor Card */}
           <motion.div 
             whileTap={{ scale: 0.98 }}
             style={{ 
@@ -212,6 +160,110 @@ const LearnScreen = ({ onTabChange }) => {
           </div>
         </div>
       </div>
+
+      {/* Quiz Modal Overlay */}
+      <AnimatePresence>
+        {showQuiz && (
+          <div style={{ 
+            position: 'absolute', inset: 0, zIndex: 1000, 
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' 
+          }}>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeQuiz}
+              style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)' }}
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 40 }}
+              style={{ 
+                backgroundColor: 'var(--md-sys-color-surface)', 
+                width: '100%', maxWidth: '360px', borderRadius: '32px', 
+                padding: '32px 24px', position: 'relative', zIndex: 1001,
+                boxShadow: '0 24px 60px rgba(0,0,0,0.3)'
+              }}
+            >
+              <button 
+                onClick={closeQuiz}
+                style={{ position: 'absolute', top: '16px', right: '16px', color: 'var(--md-sys-color-outline)' }}
+              >
+                <X size={24} />
+              </button>
+
+              <AnimatePresence mode="wait">
+                {quizStep === 'question' ? (
+                  <motion.div key="question" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+                    <div style={{ 
+                      width: '56px', height: '56px', backgroundColor: 'var(--md-sys-color-primary-container)', 
+                      borderRadius: '16px', marginBottom: '24px', display: 'flex', 
+                      alignItems: 'center', justifyContent: 'center', color: 'var(--md-sys-color-primary)'
+                    }}>
+                      <Trophy size={28} />
+                    </div>
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}>
+                      Daily Quiz
+                    </h2>
+                    <p style={{ fontSize: '1.05rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, marginBottom: '24px' }}>
+                      {simplifiedQuiz.question}
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {simplifiedQuiz.options.map(opt => (
+                        <button 
+                          key={opt.id}
+                          onClick={() => handleOptionSelect(opt)}
+                          style={{ 
+                            backgroundColor: 'var(--md-sys-color-surface-container-high)', padding: '16px', 
+                            borderRadius: '16px', color: 'var(--md-sys-color-on-surface)', textAlign: 'left',
+                            fontSize: '0.95rem', fontWeight: 500, border: '1px solid var(--md-sys-color-outline-variant)'
+                          }}
+                        >
+                          {opt.text}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div key="feedback" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+                    <div style={{ 
+                      width: '64px', height: '64px', 
+                      backgroundColor: feedback.correct ? '#1B5E20' : '#BA1A1A', 
+                      borderRadius: '20px', marginBottom: '24px', display: 'flex', 
+                      alignItems: 'center', justifyContent: 'center', color: 'white'
+                    }}>
+                      {feedback.correct ? <CheckCircle2 size={32} /> : <AlertCircle size={32} />}
+                    </div>
+                    <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '8px', color: feedback.correct ? '#1B5E20' : '#BA1A1A' }}>
+                      {feedback.correct ? 'Spot On!' : 'Wait a minute...'}
+                    </h2>
+                    <div style={{ 
+                      backgroundColor: feedback.correct ? '#E8F5E9' : '#FFEBEE', 
+                      padding: '20px', borderRadius: '20px', marginBottom: '24px',
+                      border: `1px solid ${feedback.correct ? '#C8E6C9' : '#FFCDD2'}`
+                    }}>
+                      <p style={{ fontSize: '1rem', lineHeight: 1.5, color: feedback.correct ? '#1B5E20' : '#B71C1C' }}>
+                        {feedback.explanation}
+                      </p>
+                    </div>
+                    <button 
+                      onClick={closeQuiz}
+                      style={{ 
+                        backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+                        width: '100%', padding: '16px', borderRadius: '100px', 
+                        fontWeight: 700, fontSize: '1rem'
+                      }}
+                    >
+                      {feedback.correct ? 'Claim 50 🪙' : 'I Understood'}
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Navigation Bar (M3 style) */}
       <div style={{ 
