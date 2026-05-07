@@ -6,6 +6,7 @@ import SwipeScreen from './screens/SwipeScreen';
 import MotivatingScreen from './screens/MotivatingScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import LearnScreen from './screens/LearnScreen';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
@@ -53,6 +54,12 @@ function App() {
       {currentScreen === 'dashboard' && activeTab === 'profile' && (
         <ProfileScreen 
           key="profile" 
+          onTabChange={setActiveTab}
+        />
+      )}
+      {currentScreen === 'dashboard' && activeTab === 'learn' && (
+        <LearnScreen 
+          key="learn" 
           onTabChange={setActiveTab}
         />
       )}
