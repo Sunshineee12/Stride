@@ -37,7 +37,7 @@ const WelcomeScreen = ({ onNext }) => {
             fontSize: '2.4rem', 
             fontWeight: 700, 
             marginBottom: '16px', 
-            letterSpacing: '0.15em', 
+            letterSpacing: '0.02em', 
             color: 'var(--md-sys-color-primary)',
             textTransform: 'uppercase'
           }}

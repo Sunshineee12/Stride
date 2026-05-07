@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
+import { logSwipe } from '../supabase';
 
 const CARD_DATA = [
   { id: 1, title: 'BSE & NSE', desc: 'The two main stock markets in India where shares are bought and sold.', example: 'Think of them as the Amazon and Flipkart of stocks—just two different digital malls where you buy company shares.' },
@@ -89,8 +90,11 @@ const SwipeScreen = ({ onComplete }) => {
   const [knownItems, setKnownItems] = useState([]);
   const [explanation, setExplanation] = useState(null);
 
-  const removeCard = (id, result) => {
+  const removeCard = async (id, result) => {
     const card = cards.find(c => c.id === id);
+    
+    // Log response to "super sql" (Supabase)
+    logSwipe(id, card.title, result);
     
     if (result === 'known') {
       setKnownItems(prev => [...prev, card.title]);

@@ -45,7 +45,7 @@ const HomeScreen = () => {
             fontWeight: 700, 
             color: 'var(--md-sys-color-on-surface)',
             textTransform: 'uppercase',
-            letterSpacing: '0.1em'
+            letterSpacing: '0.02em'
           }}>Stride</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
