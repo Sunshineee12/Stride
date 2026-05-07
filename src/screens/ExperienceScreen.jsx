@@ -17,24 +17,24 @@ const ExperienceScreen = ({ onNext }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          style={{ fontSize: '2rem', fontWeight: 500, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}
+          style={{ fontSize: '24px', fontWeight: 600, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}
         >
-          Where are you starting from?
+          How is your journey starting?
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '1.1rem', lineHeight: 1.5 }}
+          style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '16px', lineHeight: 1.5 }}
         >
-          No judgment here. We just want to tailor Stride for you.
+          Every path is unique. We're here to walk alongside you, no matter where you're starting.
         </motion.p>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {[
-          { title: "I'm a Beginner", desc: "I want to learn the basics.", icon: Sprout },
-          { title: "Some Knowledge", desc: "I know a bit, but want more.", icon: BookOpen }
+          { title: "I'm new and curious", desc: "I'd love to learn the basics gently.", icon: Sprout },
+          { title: "I've taken a few steps", desc: "I know a bit, and I'm ready to grow.", icon: BookOpen }
         ].map((item, idx) => (
           <motion.button
             key={item.title}
@@ -44,11 +44,11 @@ const ExperienceScreen = ({ onNext }) => {
             onClick={onNext}
             style={{
               backgroundColor: 'var(--md-sys-color-surface-container-high)',
-              padding: '24px',
+              padding: '20px',
               borderRadius: 'var(--md-sys-shape-corner-large)',
               display: 'flex',
               alignItems: 'center',
-              gap: '20px',
+              gap: '16px',
               textAlign: 'left',
               cursor: 'pointer',
               border: 'none'
@@ -57,14 +57,14 @@ const ExperienceScreen = ({ onNext }) => {
           >
             <div style={{ 
               backgroundColor: 'var(--md-sys-color-primary-container)', 
-              padding: '16px', borderRadius: '16px', 
+              padding: '12px', borderRadius: '16px', 
               color: 'var(--md-sys-color-on-primary-container)' 
             }}>
-              <item.icon size={32} />
+              <item.icon size={28} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 600, marginBottom: '4px', color: 'var(--md-sys-color-on-surface)' }}>{item.title}</h3>
-              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.95rem' }}>{item.desc}</p>
+              <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '4px', color: 'var(--md-sys-color-on-surface)' }}>{item.title}</h3>
+              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '14px' }}>{item.desc}</p>
             </div>
           </motion.button>
         ))}
