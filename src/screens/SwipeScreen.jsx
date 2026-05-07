@@ -174,7 +174,6 @@ const SwipeScreen = ({ onComplete }) => {
               </p>
               
               <div style={{ backgroundColor: 'var(--bg-color)', padding: '16px', borderRadius: '16px', textAlign: 'left', marginBottom: '24px' }}>
-                <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '8px' }}>💡</span>
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-dark)', lineHeight: 1.4, fontStyle: 'italic' }}>
                   "{explanation.example}"
                 </p>

@@ -45,18 +45,19 @@ const WelcomeScreen = ({ onNext }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
-        className="mt-auto mb-8"
+        className="mt-auto"
+        style={{ marginBottom: '64px', display: 'flex', justifyContent: 'center' }}
       >
         <button 
           onClick={onNext} 
           style={{ 
             backgroundColor: 'white', 
             color: 'var(--primary-dark)', 
-            padding: '18px 40px', 
+            padding: '14px 32px', 
             borderRadius: '100px', 
-            fontSize: '1.2rem', 
+            fontSize: '1.05rem', 
             fontWeight: 600, 
-            width: '100%', 
+            width: '80%', 
             border: 'none', 
             cursor: 'pointer',
             boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
