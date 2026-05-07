@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, LayoutGrid, Info, Rocket, Home, GraduationCap, TrendingUp, User, HeartHandshake, X } from 'lucide-react';
+import { Search, LayoutGrid, Info, Rocket, Home, GraduationCap, TrendingUp, User, HeartHandshake, X, Coins } from 'lucide-react';
+import StockDetailScreen from './StockDetailScreen';
 
 const HomeScreen = ({ userKnowledge, onTabChange }) => {
   const [selectedPop, setSelectedPop] = useState(null);
+  const [showTrialIntro, setShowTrialIntro] = useState(false);
+  const [showStockDetail, setShowStockDetail] = useState(false);
 
   const indexDetails = {
     'NIFTY 50': {
@@ -21,200 +24,253 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
       className="screen-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      style={{ backgroundColor: 'var(--md-sys-color-surface)', padding: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', position: 'relative' }}
+      style={{ backgroundColor: 'var(--md-sys-color-surface)', padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}
     >
-      {/* Top App Bar (M3) */}
-      <header style={{ 
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
-        padding: '16px 16px 8px', 
-        backgroundColor: 'var(--md-sys-color-surface)',
-        zIndex: 10,
-        opacity: selectedPop ? 0.4 : 1
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ 
-            width: '40px', height: '40px', 
-            backgroundColor: 'var(--md-sys-color-primary-container)', 
-            borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
-            color: 'var(--md-sys-color-on-primary-container)' 
-          }}>
-            <TrendingUp size={20} />
-          </div>
-          <h1 style={{ 
-            fontSize: '1.1rem', 
-            fontWeight: 700, 
-            color: 'var(--md-sys-color-on-surface)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.01em'
-          }}>Stride</h1>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button style={{ padding: '8px', color: 'var(--md-sys-color-on-surface-variant)' }}><Search size={22} /></button>
-          <div style={{ 
-            width: '40px', height: '40px', 
-            backgroundColor: 'var(--md-sys-color-secondary-container)', 
-            borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', 
-            color: 'var(--md-sys-color-on-secondary-container)', fontWeight: 500
-          }}>
-            S
-          </div>
-        </div>
-      </header>
-
-      {/* Tabs (M3 style) */}
-      <div style={{ display: 'flex', padding: '0 16px', marginBottom: '16px', opacity: selectedPop ? 0.4 : 1 }}>
-        <div style={{ 
-          flex: 1, textAlign: 'center', padding: '14px 0', 
-          borderBottom: '3px solid var(--md-sys-color-primary)', 
-          color: 'var(--md-sys-color-on-surface)', fontWeight: 600 
+      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '100px', filter: showTrialIntro ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}>
+        {/* Top App Bar (M3) */}
+        <header style={{ 
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+          padding: '16px 16px 8px', 
+          backgroundColor: 'var(--md-sys-color-surface)',
+          zIndex: 10,
+          opacity: selectedPop ? 0.4 : 1
         }}>
-          Explore
-        </div>
-        <div style={{ 
-          flex: 1, textAlign: 'center', padding: '14px 0', 
-          color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 500 
-        }}>
-          Portfolio
-        </div>
-      </div>
-
-      <div style={{ padding: '0 16px', flex: 1, paddingBottom: '100px' }}>
-        {/* Indices */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', position: 'relative' }}>
-          {['NIFTY 50', 'SENSEX'].map((name) => (
-            <div key={name} style={{ flex: 1, position: 'relative' }}>
-              <motion.div 
-                whileTap={{ scale: 0.98 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedPop(selectedPop === name ? null : name);
-                }}
-                style={{ 
-                  backgroundColor: 'var(--md-sys-color-surface-container)', 
-                  borderRadius: 'var(--md-sys-shape-corner-large)', 
-                  padding: '16px', 
-                  cursor: 'pointer',
-                  zIndex: selectedPop === name ? 110 : 1,
-                  position: 'relative',
-                  boxShadow: selectedPop === name ? '0 20px 40px rgba(103, 80, 164, 0.25)' : 'none',
-                  transition: 'box-shadow 0.3s ease',
-                  border: selectedPop === name ? '1px solid var(--md-sys-color-outline-variant)' : 'none'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>{name}</span>
-                  <Info size={14} color="var(--md-sys-color-primary)" />
-                </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-                  <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>
-                    {name === 'NIFTY 50' ? '22,453.30' : '73,876.82'}
-                  </span>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#1B5E20' }}>+0.4%</span>
-                </div>
-              </motion.div>
-
-              {/* Small Dialog Box beside it */}
-              <AnimatePresence>
-                {selectedPop === name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                    style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      width: '180px',
-                      backgroundColor: 'var(--md-sys-color-primary-container)',
-                      color: 'var(--md-sys-color-on-primary-container)',
-                      borderRadius: '16px',
-                      padding: '12px',
-                      marginTop: '12px',
-                      zIndex: 120,
-                      boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
-                      fontSize: '0.85rem',
-                      lineHeight: 1.4,
-                      pointerEvents: 'none'
-                    }}
-                  >
-                    <div style={{ 
-                      position: 'absolute', top: '-6px', left: '20px', 
-                      width: '12px', height: '12px', 
-                      backgroundColor: 'var(--md-sys-color-primary-container)', 
-                      transform: 'rotate(45deg)' 
-                    }} />
-                    {indexDetails[name].oneLiner}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
-
-        {/* Action Cards (M3 Filled Cards) */}
-        <motion.div 
-          whileTap={{ scale: 0.99 }}
-          style={{ 
-            backgroundColor: 'var(--md-sys-color-secondary-container)', 
-            borderRadius: 'var(--md-sys-shape-corner-large)', 
-            padding: '20px', marginBottom: '16px', 
-            opacity: selectedPop ? 0.4 : 1
-          }}
-        >
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ 
-              width: '48px', height: '48px', 
-              backgroundColor: 'var(--md-sys-color-primary)', 
-              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' 
-            }}>
-              <HeartHandshake size={24} />
-            </div>
-            <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--md-sys-color-on-secondary-container)' }}>Learn without Risk</h3>
-              <p style={{ color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, fontSize: '0.85rem' }}>Start with dummy coins.</p>
-            </div>
-          </div>
-          <button style={{ 
-            backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%' 
-          }}>
-            Try Now
-          </button>
-        </motion.div>
-
-        <motion.div 
-          whileTap={{ scale: 0.99 }}
-          style={{ 
-            backgroundColor: 'var(--md-sys-color-surface-container-high)', 
-            borderRadius: 'var(--md-sys-shape-corner-large)', 
-            padding: '20px', 
-            opacity: selectedPop ? 0.4 : 1,
-            border: '1px solid var(--md-sys-color-outline-variant)'
-          }}
-        >
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
-            <div style={{ 
-              width: '48px', height: '48px', 
+              width: '40px', height: '40px', 
               backgroundColor: 'var(--md-sys-color-primary-container)', 
               borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
               color: 'var(--md-sys-color-on-primary-container)' 
             }}>
-              <Rocket size={24} />
+              <TrendingUp size={20} />
             </div>
-            <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--md-sys-color-on-surface)' }}>First Trade</h3>
-              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.85rem' }}>Ready to grow wealth?</p>
+            <h1 style={{ 
+              fontSize: '1.1rem', 
+              fontWeight: 700, 
+              color: 'var(--md-sys-color-on-surface)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.01em'
+            }}>Stride</h1>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button style={{ padding: '8px', color: 'var(--md-sys-color-on-surface-variant)' }}><Search size={22} /></button>
+            <div style={{ 
+              width: '40px', height: '40px', 
+              backgroundColor: 'var(--md-sys-color-secondary-container)', 
+              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+              color: 'var(--md-sys-color-on-secondary-container)', fontWeight: 500
+            }}>
+              S
             </div>
           </div>
-          <button style={{ 
-            backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%',
-            boxShadow: '0 4px 12px rgba(103, 80, 164, 0.2)'
+        </header>
+
+        {/* Tabs (M3 style) */}
+        <div style={{ display: 'flex', padding: '0 16px', marginBottom: '16px', opacity: selectedPop ? 0.4 : 1 }}>
+          <div style={{ 
+            flex: 1, textAlign: 'center', padding: '14px 0', 
+            borderBottom: '3px solid var(--md-sys-color-primary)', 
+            color: 'var(--md-sys-color-on-surface)', fontWeight: 600 
           }}>
-            Find Stocks
-          </button>
-        </motion.div>
+            Explore
+          </div>
+          <div style={{ 
+            flex: 1, textAlign: 'center', padding: '14px 0', 
+            color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 500 
+          }}>
+            Portfolio
+          </div>
+        </div>
+
+        <div style={{ padding: '0 16px' }}>
+          {/* Indices */}
+          <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', position: 'relative' }}>
+            {['NIFTY 50', 'SENSEX'].map((name) => (
+              <div key={name} style={{ flex: 1, position: 'relative' }}>
+                <motion.div 
+                  whileTap={{ scale: 0.98 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedPop(selectedPop === name ? null : name);
+                  }}
+                  style={{ 
+                    backgroundColor: 'var(--md-sys-color-surface-container)', 
+                    borderRadius: 'var(--md-sys-shape-corner-large)', 
+                    padding: '16px', 
+                    cursor: 'pointer',
+                    zIndex: selectedPop === name ? 110 : 1,
+                    position: 'relative',
+                    boxShadow: selectedPop === name ? '0 20px 40px rgba(103, 80, 164, 0.25)' : 'none',
+                    transition: 'box-shadow 0.3s ease',
+                    border: selectedPop === name ? '1px solid var(--md-sys-color-outline-variant)' : 'none'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>{name}</span>
+                    <Info size={14} color="var(--md-sys-color-primary)" />
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                    <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>
+                      {name === 'NIFTY 50' ? '22,453.30' : '73,876.82'}
+                    </span>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#1B5E20' }}>+0.4%</span>
+                  </div>
+                </motion.div>
+
+                {/* Small Dialog Box beside it */}
+                <AnimatePresence>
+                  {selectedPop === name && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                      style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: 0,
+                        width: '180px',
+                        backgroundColor: 'var(--md-sys-color-primary-container)',
+                        color: 'var(--md-sys-color-on-primary-container)',
+                        borderRadius: '16px',
+                        padding: '12px',
+                        marginTop: '12px',
+                        zIndex: 120,
+                        boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                        fontSize: '0.85rem',
+                        lineHeight: 1.4,
+                        pointerEvents: 'none'
+                      }}
+                    >
+                      <div style={{ 
+                        position: 'absolute', top: '-6px', left: '20px', 
+                        width: '12px', height: '12px', 
+                        backgroundColor: 'var(--md-sys-color-primary-container)', 
+                        transform: 'rotate(45deg)' 
+                      }} />
+                      {indexDetails[name].oneLiner}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+
+          {/* Action Cards (M3 Filled Cards) */}
+          <motion.div 
+            whileTap={{ scale: 0.99 }}
+            onClick={() => setShowTrialIntro(true)}
+            style={{ 
+              backgroundColor: 'var(--md-sys-color-secondary-container)', 
+              borderRadius: 'var(--md-sys-shape-corner-large)', 
+              padding: '20px', marginBottom: '16px', 
+              opacity: selectedPop ? 0.4 : 1,
+              cursor: 'pointer'
+            }}
+          >
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ 
+                width: '48px', height: '48px', 
+                backgroundColor: 'var(--md-sys-color-primary)', 
+                borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' 
+              }}>
+                <HeartHandshake size={24} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--md-sys-color-on-secondary-container)' }}>Learn without Risk</h3>
+                <p style={{ color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, fontSize: '0.85rem' }}>Start with dummy coins.</p>
+              </div>
+            </div>
+            <button style={{ 
+              backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+              padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%',
+              pointerEvents: 'none' 
+            }}>
+              Try Now
+            </button>
+          </motion.div>
+
+          <motion.div 
+            whileTap={{ scale: 0.99 }}
+            style={{ 
+              backgroundColor: 'var(--md-sys-color-surface-container-high)', 
+              borderRadius: 'var(--md-sys-shape-corner-large)', 
+              padding: '20px', 
+              opacity: selectedPop ? 0.4 : 1,
+              border: '1px solid var(--md-sys-color-outline-variant)'
+            }}
+          >
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ 
+                width: '48px', height: '48px', 
+                backgroundColor: 'var(--md-sys-color-primary-container)', 
+                borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                color: 'var(--md-sys-color-on-primary-container)' 
+              }}>
+                <Rocket size={24} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--md-sys-color-on-surface)' }}>First Trade</h3>
+                <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.85rem' }}>Ready to grow wealth?</p>
+              </div>
+            </div>
+            <button style={{ 
+              backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+              padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%',
+              boxShadow: '0 4px 12px rgba(103, 80, 164, 0.2)'
+            }}>
+              Find Stocks
+            </button>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Trial Intro Modal */}
+      <AnimatePresence>
+        {showTrialIntro && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setShowTrialIntro(false)}
+              style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              style={{ 
+                backgroundColor: 'var(--md-sys-color-surface)', width: '100%', maxWidth: '320px', 
+                borderRadius: '32px', padding: '32px 24px', position: 'relative', zIndex: 1001,
+                textAlign: 'center'
+              }}
+            >
+              <div style={{ 
+                width: '64px', height: '64px', backgroundColor: '#FFF9C4', 
+                borderRadius: '20px', margin: '0 auto 24px', display: 'flex', 
+                alignItems: 'center', justifyContent: 'center', color: '#FBC02D'
+              }}>
+                <Coins size={40} />
+              </div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '12px' }}>Welcome, Trader!</h2>
+              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '1rem', lineHeight: 1.5, marginBottom: '32px' }}>
+                We've credited <span style={{ fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>1,000 Coins</span> to your dummy account. Use them to learn trading without losing real money!
+              </p>
+              <button 
+                onClick={() => { setShowTrialIntro(false); setShowStockDetail(true); }}
+                style={{ backgroundColor: 'var(--md-sys-color-primary)', color: 'white', width: '100%', padding: '16px', borderRadius: '100px', fontWeight: 700, fontSize: '1rem' }}
+              >
+                Let's Buy a Stock!
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Stock Detail Screen Overlay */}
+      <AnimatePresence>
+        {showStockDetail && (
+          <StockDetailScreen onBack={() => setShowStockDetail(false)} />
+        )}
+      </AnimatePresence>
 
       {/* Navigation Bar (M3 style) */}
       <div style={{ 
@@ -252,7 +308,7 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
         ))}
       </div>
 
-      {/* Dull Overlay */}
+      {/* Dull Overlay for Indices info */}
       <AnimatePresence>
         {selectedPop && (
           <motion.div 
