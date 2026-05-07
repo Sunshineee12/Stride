@@ -33,7 +33,7 @@ const WelcomeScreen = ({ onNext }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          style={{ fontSize: '3.5rem', fontWeight: 700, marginBottom: '16px', letterSpacing: '-0.02em', color: 'var(--md-sys-color-primary)' }}
+          style={{ fontSize: '2.8rem', fontWeight: 600, marginBottom: '16px', letterSpacing: '-0.03em', color: 'var(--md-sys-color-primary)' }}
         >
           Stride
         </motion.h1>

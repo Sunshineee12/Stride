@@ -182,14 +182,16 @@ const HomeScreen = () => {
             backgroundColor: 'var(--md-sys-color-surface-container-high)', 
             borderRadius: 'var(--md-sys-shape-corner-large)', 
             padding: '20px', 
-            opacity: selectedPop ? 0.4 : 1
+            opacity: selectedPop ? 0.4 : 1,
+            border: '1px solid var(--md-sys-color-outline-variant)'
           }}
         >
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ 
               width: '48px', height: '48px', 
-              backgroundColor: 'var(--md-sys-color-outline)', 
-              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' 
+              backgroundColor: 'var(--md-sys-color-primary-container)', 
+              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+              color: 'var(--md-sys-color-on-primary-container)' 
             }}>
               <Rocket size={24} />
             </div>
@@ -199,8 +201,9 @@ const HomeScreen = () => {
             </div>
           </div>
           <button style={{ 
-            backgroundColor: 'var(--md-sys-color-on-surface)', color: 'white', 
-            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%' 
+            backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%',
+            boxShadow: '0 4px 12px rgba(103, 80, 164, 0.2)'
           }}>
             Find Stocks
           </button>
