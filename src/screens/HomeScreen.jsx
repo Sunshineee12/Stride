@@ -8,188 +8,251 @@ const HomeScreen = () => {
   const indexDetails = {
     'NIFTY 50': {
       title: 'NIFTY 50',
-      oneLiner: "A scorecard showing how India's 50 biggest companies are performing today."
+      oneLiner: "Scorecard for India's 50 biggest companies."
     },
     'SENSEX': {
       title: 'SENSEX',
-      oneLiner: "A scorecard for 30 of the oldest and largest companies in India."
+      oneLiner: "Scorecard for the 30 oldest large companies."
     }
   };
 
   return (
     <motion.div 
       className="screen-container"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      style={{ backgroundColor: '#FCFAFF', padding: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', position: 'relative' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      style={{ backgroundColor: 'var(--md-sys-color-surface)', padding: 0, overflowY: 'auto', display: 'flex', flexDirection: 'column', position: 'relative' }}
     >
-      {/* Top Header */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 24px 16px', opacity: selectedPop ? 0.3 : 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '40px', height: '40px', backgroundColor: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+      {/* Top App Bar (M3) */}
+      <header style={{ 
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+        padding: '16px 16px 8px', 
+        backgroundColor: 'var(--md-sys-color-surface)',
+        zIndex: 10,
+        opacity: selectedPop ? 0.4 : 1
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ 
+            width: '40px', height: '40px', 
+            backgroundColor: 'var(--md-sys-color-primary-container)', 
+            borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+            color: 'var(--md-sys-color-on-primary-container)' 
+          }}>
             <TrendingUp size={20} />
           </div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-dark)' }}>Stride</h1>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: 500, color: 'var(--md-sys-color-on-surface)' }}>Stride</h1>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: 'var(--text-light)' }}>
-          <Search size={22} />
-          <LayoutGrid size={22} />
-          <div style={{ width: '36px', height: '36px', backgroundColor: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 600, fontSize: '1.1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button style={{ padding: '8px', color: 'var(--md-sys-color-on-surface-variant)' }}><Search size={22} /></button>
+          <div style={{ 
+            width: '40px', height: '40px', 
+            backgroundColor: 'var(--md-sys-color-secondary-container)', 
+            borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+            color: 'var(--md-sys-color-on-secondary-container)', fontWeight: 500
+          }}>
             S
           </div>
         </div>
       </header>
 
-      {/* Tabs */}
-      <div style={{ display: 'flex', borderBottom: '1px solid #EAE5F0', padding: '0 24px', opacity: selectedPop ? 0.3 : 1 }}>
-        <div style={{ padding: '0 16px 12px', borderBottom: '3px solid var(--primary)', fontWeight: 600, color: 'var(--primary-dark)', fontSize: '1.05rem' }}>
+      {/* Tabs (M3 style) */}
+      <div style={{ display: 'flex', padding: '0 16px', marginBottom: '16px', opacity: selectedPop ? 0.4 : 1 }}>
+        <div style={{ 
+          flex: 1, textAlign: 'center', padding: '14px 0', 
+          borderBottom: '3px solid var(--md-sys-color-primary)', 
+          color: 'var(--md-sys-color-on-surface)', fontWeight: 600 
+        }}>
           Explore
         </div>
-        <div style={{ padding: '0 16px 12px', fontWeight: 500, color: 'var(--text-light)', fontSize: '1.05rem' }}>
+        <div style={{ 
+          flex: 1, textAlign: 'center', padding: '14px 0', 
+          color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 500 
+        }}>
           Portfolio
         </div>
       </div>
 
-      <div style={{ padding: '24px', flex: 1, paddingBottom: '100px', opacity: selectedPop ? 0.3 : 1 }}>
+      <div style={{ padding: '0 16px', flex: 1, paddingBottom: '100px' }}>
         {/* Indices */}
-        <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
-          <motion.div 
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedPop('NIFTY 50')}
-            style={{ flex: 1, backgroundColor: 'white', border: '1px solid #F0ECF4', borderRadius: '16px', padding: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', cursor: 'pointer' }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', fontWeight: 600 }}>NIFTY 50</span>
-              <Info size={14} color="var(--primary-dark)" />
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', position: 'relative' }}>
+          {['NIFTY 50', 'SENSEX'].map((name) => (
+            <div key={name} style={{ flex: 1, position: 'relative' }}>
+              <motion.div 
+                whileTap={{ scale: 0.98 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedPop(selectedPop === name ? null : name);
+                }}
+                style={{ 
+                  backgroundColor: 'var(--md-sys-color-surface-container)', 
+                  borderRadius: 'var(--md-sys-shape-corner-large)', 
+                  padding: '16px', 
+                  cursor: 'pointer',
+                  zIndex: selectedPop === name ? 110 : 1,
+                  position: 'relative',
+                  boxShadow: selectedPop === name ? '0 20px 40px rgba(103, 80, 164, 0.25)' : 'none',
+                  transition: 'box-shadow 0.3s ease',
+                  border: selectedPop === name ? '1px solid var(--md-sys-color-outline-variant)' : 'none'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>{name}</span>
+                  <Info size={14} color="var(--md-sys-color-primary)" />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>
+                    {name === 'NIFTY 50' ? '22,453.30' : '73,876.82'}
+                  </span>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#1B5E20' }}>+0.4%</span>
+                </div>
+              </motion.div>
+
+              {/* Small Dialog Box beside it */}
+              <AnimatePresence>
+                {selectedPop === name && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      width: '180px',
+                      backgroundColor: 'var(--md-sys-color-primary-container)',
+                      color: 'var(--md-sys-color-on-primary-container)',
+                      borderRadius: '16px',
+                      padding: '12px',
+                      marginTop: '12px',
+                      zIndex: 120,
+                      boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                      fontSize: '0.85rem',
+                      lineHeight: 1.4,
+                      pointerEvents: 'none'
+                    }}
+                  >
+                    <div style={{ 
+                      position: 'absolute', top: '-6px', left: '20px', 
+                      width: '12px', height: '12px', 
+                      backgroundColor: 'var(--md-sys-color-primary-container)', 
+                      transform: 'rotate(45deg)' 
+                    }} />
+                    {indexDetails[name].oneLiner}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-              <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-dark)' }}>22,453.30</span>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#51cf66' }}>+0.45%</span>
-            </div>
-          </motion.div>
-          <motion.div 
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedPop('SENSEX')}
-            style={{ flex: 1, backgroundColor: 'white', border: '1px solid #F0ECF4', borderRadius: '16px', padding: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', cursor: 'pointer' }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', fontWeight: 600 }}>SENSEX</span>
-              <Info size={14} color="var(--primary-dark)" />
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-              <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-dark)' }}>73,876.82</span>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#51cf66' }}>+0.38%</span>
-            </div>
-          </motion.div>
+          ))}
         </div>
 
-        {/* Action Cards */}
+        {/* Action Cards (M3 Filled Cards) */}
         <motion.div 
-          whileHover={{ y: -2 }}
-          style={{ backgroundColor: 'var(--primary-light)', borderRadius: '24px', padding: '24px', marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+          whileTap={{ scale: 0.99 }}
+          style={{ 
+            backgroundColor: 'var(--md-sys-color-secondary-container)', 
+            borderRadius: 'var(--md-sys-shape-corner-large)', 
+            padding: '20px', marginBottom: '16px', 
+            opacity: selectedPop ? 0.4 : 1
+          }}
         >
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-            <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+            <div style={{ 
+              width: '48px', height: '48px', 
+              backgroundColor: 'var(--md-sys-color-primary)', 
+              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' 
+            }}>
               <HeartHandshake size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-dark)', marginBottom: '4px' }}>Learn without any Risk</h3>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.95rem', lineHeight: 1.4 }}>Start with dummy coins and build your confidence before playing for real.</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--md-sys-color-on-secondary-container)' }}>Learn without Risk</h3>
+              <p style={{ color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, fontSize: '0.85rem' }}>Start with dummy coins.</p>
             </div>
           </div>
-          <button style={{ backgroundColor: 'var(--primary-dark)', color: 'white', padding: '14px', borderRadius: '16px', fontWeight: 600, fontSize: '1rem', border: 'none', width: '100%' }}>
+          <button style={{ 
+            backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%' 
+          }}>
             Try Now
           </button>
         </motion.div>
 
         <motion.div 
-          whileHover={{ y: -2 }}
-          style={{ backgroundColor: 'var(--primary-light)', borderRadius: '24px', padding: '24px', marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+          whileTap={{ scale: 0.99 }}
+          style={{ 
+            backgroundColor: 'var(--md-sys-color-surface-container-high)', 
+            borderRadius: 'var(--md-sys-shape-corner-large)', 
+            padding: '20px', 
+            opacity: selectedPop ? 0.4 : 1
+          }}
         >
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-            <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
+            <div style={{ 
+              width: '48px', height: '48px', 
+              backgroundColor: 'var(--md-sys-color-outline)', 
+              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' 
+            }}>
               <Rocket size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-dark)', marginBottom: '4px' }}>Start your first trade</h3>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.95rem', lineHeight: 1.4 }}>Ready to grow your wealth? Start with a small investment and learn as you go.</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--md-sys-color-on-surface)' }}>First Trade</h3>
+              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.85rem' }}>Ready to grow wealth?</p>
             </div>
           </div>
-          <button style={{ backgroundColor: 'var(--primary-dark)', color: 'white', padding: '14px', borderRadius: '16px', fontWeight: 600, fontSize: '1rem', border: 'none', width: '100%' }}>
-            Find your first stock
+          <button style={{ 
+            backgroundColor: 'var(--md-sys-color-on-surface)', color: 'white', 
+            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%' 
+          }}>
+            Find Stocks
           </button>
         </motion.div>
       </div>
 
-      {/* Bottom Nav */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor: '#FCFAFF', borderTop: '1px solid #EAE5F0', display: 'flex', justifyContent: 'space-around', padding: '16px 0 24px', zIndex: 50, opacity: selectedPop ? 0.3 : 1 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'var(--primary-dark)' }}>
-          <div style={{ backgroundColor: 'var(--primary-light)', padding: '8px 20px', borderRadius: '100px' }}>
-            <Home size={20} />
+      {/* Navigation Bar (M3 style) */}
+      <div style={{ 
+        position: 'absolute', bottom: 0, left: 0, width: '100%', 
+        backgroundColor: 'var(--md-sys-color-surface-container)', 
+        display: 'flex', justifyContent: 'space-around', padding: '12px 0 24px',
+        zIndex: 50,
+        opacity: selectedPop ? 0.4 : 1
+      }}>
+        {[
+          { icon: Home, label: 'Home', active: true },
+          { icon: GraduationCap, label: 'Learn' },
+          { icon: TrendingUp, label: 'Trade' },
+          { icon: User, label: 'Profile' }
+        ].map((item) => (
+          <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+            <div style={{ 
+              backgroundColor: item.active ? 'var(--md-sys-color-secondary-container)' : 'transparent', 
+              padding: '4px 20px', borderRadius: '16px',
+              color: item.active ? 'var(--md-sys-color-on-secondary-container)' : 'var(--md-sys-color-on-surface-variant)'
+            }}>
+              <item.icon size={24} />
+            </div>
+            <span style={{ 
+              fontSize: '0.75rem', 
+              fontWeight: item.active ? 600 : 500,
+              color: item.active ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-on-surface-variant)'
+            }}>{item.label}</span>
           </div>
-          <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>Home</span>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'var(--text-light)', paddingTop: '8px' }}>
-          <GraduationCap size={20} />
-          <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>Learn</span>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'var(--text-light)', paddingTop: '8px' }}>
-          <TrendingUp size={20} />
-          <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>Trade</span>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'var(--text-light)', paddingTop: '8px' }}>
-          <User size={20} />
-          <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>Profile</span>
-        </div>
+        ))}
       </div>
 
-      {/* Pop Explanation Overlay */}
+      {/* Dull Overlay */}
       <AnimatePresence>
         {selectedPop && (
-          <>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedPop(null)}
-              style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(252, 250, 255, 0.7)', zIndex: 100, backdropFilter: 'blur(4px)' }}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              style={{
-                position: 'absolute',
-                top: '20%',
-                left: '24px',
-                right: '24px',
-                backgroundColor: 'white',
-                borderRadius: '24px',
-                padding: '32px',
-                boxShadow: '0 20px 50px rgba(111, 76, 184, 0.15)',
-                zIndex: 101,
-                textAlign: 'center',
-                border: '1px solid var(--primary-light)'
-              }}
-            >
-              <button 
-                onClick={() => setSelectedPop(null)}
-                style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: 'var(--text-light)', cursor: 'pointer' }}
-              >
-                <X size={20} />
-              </button>
-              <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--primary-light)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)', margin: '0 auto 16px' }}>
-                <Info size={24} />
-              </div>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--primary-dark)', marginBottom: '12px' }}>
-                {indexDetails[selectedPop].title}
-              </h3>
-              <p style={{ fontSize: '1.05rem', color: 'var(--text-dark)', lineHeight: 1.5 }}>
-                {indexDetails[selectedPop].oneLiner}
-              </p>
-            </motion.div>
-          </>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedPop(null)}
+            style={{ 
+              position: 'absolute', inset: 0, 
+              backgroundColor: 'rgba(0, 0, 0, 0.2)', 
+              zIndex: 100,
+              backdropFilter: 'blur(2px)'
+            }}
+          />
         )}
       </AnimatePresence>
     </motion.div>

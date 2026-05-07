@@ -11,8 +11,8 @@ const MotivatingScreen = ({ onNext }) => {
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5 }}
       style={{ 
-        backgroundColor: 'var(--primary)', 
-        color: 'white', 
+        backgroundColor: 'var(--md-sys-color-primary-container)', 
+        color: 'var(--md-sys-color-on-primary-container)', 
         justifyContent: 'center', 
         alignItems: 'center',
         textAlign: 'center'
@@ -25,10 +25,11 @@ const MotivatingScreen = ({ onNext }) => {
         style={{ position: 'relative' }}
       >
         <div style={{ 
-          width: '80px', height: '80px', backgroundColor: 'white', 
-          borderRadius: '50%', margin: '0 auto 32px', display: 'flex', 
-          alignItems: 'center', justifyContent: 'center', color: 'var(--primary)',
-          boxShadow: '0 12px 30px rgba(0,0,0,0.1)'
+          width: '80px', height: '80px', 
+          backgroundColor: 'var(--md-sys-color-primary)', 
+          borderRadius: '24px', margin: '0 auto 32px', display: 'flex', 
+          alignItems: 'center', justifyContent: 'center', color: 'white',
+          boxShadow: '0 12px 30px rgba(103, 80, 164, 0.2)'
         }}>
           <Heart size={40} fill="currentColor" />
         </div>
@@ -36,15 +37,15 @@ const MotivatingScreen = ({ onNext }) => {
         <motion.div
           animate={{ rotate: [0, 15, -15, 0] }}
           transition={{ repeat: Infinity, duration: 2, repeatDelay: 1 }}
-          style={{ position: 'absolute', top: '-10px', right: '40px', color: '#FFEAA7' }}
+          style={{ position: 'absolute', top: '-10px', right: '40px', color: 'var(--md-sys-color-primary)' }}
         >
           <Sparkles size={24} />
         </motion.div>
 
-        <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '16px', letterSpacing: '-0.02em' }}>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 600, marginBottom: '16px', letterSpacing: '-0.02em', color: 'var(--md-sys-color-on-primary-container)' }}>
           You did it!
         </h2>
-        <p style={{ fontSize: '1.15rem', opacity: 0.9, lineHeight: 1.5, maxWidth: '280px', margin: '0 auto' }}>
+        <p style={{ fontSize: '1.2rem', opacity: 0.8, lineHeight: 1.5, maxWidth: '280px', margin: '0 auto' }}>
           Taking the first step is the hardest part. We're so proud of you for showing up.
         </p>
       </motion.div>
@@ -58,16 +59,16 @@ const MotivatingScreen = ({ onNext }) => {
         <button 
           onClick={onNext} 
           style={{ 
-            backgroundColor: 'white', 
-            color: 'var(--primary-dark)', 
+            backgroundColor: 'var(--md-sys-color-primary)', 
+            color: 'white', 
             padding: '16px 32px', 
             borderRadius: '100px', 
             fontSize: '1.15rem', 
-            fontWeight: 700, 
+            fontWeight: 600, 
             width: '100%', 
             border: 'none', 
             cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
+            boxShadow: '0 8px 24px rgba(103, 80, 164, 0.2)'
           }}
         >
           Let's Go!

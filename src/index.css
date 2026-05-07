@@ -1,15 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #BCA0DC; /* soft lavender */
-  --primary-light: #E6E6FA;
-  --primary-dark: #9A7BBA;
-  --bg-color: #FCFAFF;
-  --text-dark: #2D2434;
-  --text-light: #7A6F82;
-  --white: #FFFFFF;
-  --shadow-sm: 0 4px 12px rgba(188, 160, 220, 0.15);
-  --shadow-md: 0 8px 24px rgba(188, 160, 220, 0.2);
+  /* Material 3 Lavender Palette (Soft) */
+  --md-sys-color-primary: #6750A4;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #EADDFF;
+  --md-sys-color-on-primary-container: #21005D;
+  
+  --md-sys-color-secondary-container: #E8DEF8;
+  --md-sys-color-on-secondary-container: #1D192B;
+  
+  --md-sys-color-surface: #FEF7FF;
+  --md-sys-color-surface-container: #F3EDF7;
+  --md-sys-color-surface-container-high: #ECE6F0;
+  
+  --md-sys-color-outline: #79747E;
+  --md-sys-color-outline-variant: #CAC4D0;
+
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 28px;
+  --md-sys-shape-corner-full: 100px;
+
+  /* Legacy aliases for compatibility during transition */
+  --primary: var(--md-sys-color-primary);
+  --primary-light: var(--md-sys-color-primary-container);
+  --primary-dark: #4F378B;
+  --bg-color: var(--md-sys-color-surface);
+  --text-dark: #1D1B20;
+  --text-light: #49454F;
 }
 
 * {
