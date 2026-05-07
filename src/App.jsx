@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import WelcomeScreen from './screens/WelcomeScreen';
 import ExperienceScreen from './screens/ExperienceScreen';
 import SwipeScreen from './screens/SwipeScreen';
+import MotivatingScreen from './screens/MotivatingScreen';
 import HomeScreen from './screens/HomeScreen';
 
 function App() {
@@ -26,8 +27,14 @@ function App() {
           key="swipe" 
           onComplete={(knowledge) => {
             setUserKnowledge(knowledge);
-            navigateTo('home');
+            navigateTo('motivating');
           }} 
+        />
+      )}
+      {currentScreen === 'motivating' && (
+        <MotivatingScreen 
+          key="motivating" 
+          onNext={() => navigateTo('home')} 
         />
       )}
       {currentScreen === 'home' && (

@@ -125,6 +125,18 @@ const SwipeScreen = ({ onComplete }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      <div style={{ position: 'absolute', top: '24px', right: '24px', zIndex: 50 }}>
+        <button 
+          onClick={() => onComplete(knownItems)}
+          style={{ 
+            background: 'none', border: 'none', color: 'var(--text-light)', 
+            fontSize: '1rem', fontWeight: 600, cursor: 'pointer' 
+          }}
+        >
+          Skip
+        </button>
+      </div>
+
       <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '30px' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-dark)' }}>Let's gauge your knowledge</h2>
         <p style={{ color: 'var(--text-light)', marginTop: '8px' }}>
