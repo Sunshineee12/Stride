@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { User, Settings, Wallet, Gift, TrendingUp, ChevronRight, LogOut, Award, HeartPulse, Tablet, Smartphone, Headphones, Coins, CheckCircle2, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { User, Settings, Wallet, Gift, TrendingUp, ChevronRight, LogOut, Award, HeartPulse, Tablet, Smartphone, Headphones, Coins, CheckCircle2, X, Info, Home, GraduationCap } from 'lucide-react';
 
 const ProfileScreen = ({ onTabChange }) => {
   const [showRedeem, setShowRedeem] = React.useState(false);
@@ -283,18 +283,5 @@ const ProfileScreen = ({ onTabChange }) => {
     </motion.div>
   );
 };
-
-// Add missing icons that were not imported but used in logic
-const GraduationCap = ({ size, color }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
-  </svg>
-);
-
-const Home = ({ size, color }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-  </svg>
-);
 
 export default ProfileScreen;
