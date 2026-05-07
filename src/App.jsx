@@ -7,6 +7,7 @@ import MotivatingScreen from './screens/MotivatingScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LearnScreen from './screens/LearnScreen';
+import TradeScreen from './screens/TradeScreen';
 import MentorFAB from './components/MentorFAB';
 
 function App() {
@@ -61,6 +62,12 @@ function App() {
       {currentScreen === 'dashboard' && activeTab === 'learn' && (
         <LearnScreen 
           key="learn" 
+          onTabChange={setActiveTab}
+        />
+      )}
+      {currentScreen === 'dashboard' && activeTab === 'trade' && (
+        <TradeScreen 
+          key="trade" 
           onTabChange={setActiveTab}
         />
       )}
