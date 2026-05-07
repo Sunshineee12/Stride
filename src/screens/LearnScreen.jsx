@@ -97,27 +97,7 @@ const LearnScreen = ({ onTabChange }) => {
             </div>
           </motion.div>
 
-          {/* Ask a Mentor Card */}
-          <motion.div 
-            whileTap={{ scale: 0.98 }}
-            style={{ 
-              backgroundColor: 'var(--md-sys-color-secondary-container)', 
-              padding: '20px', borderRadius: '28px', display: 'flex', gap: '16px', alignItems: 'center',
-              marginBottom: '32px', cursor: 'pointer', border: '1px solid var(--md-sys-color-outline-variant)'
-            }}
-          >
-            <div style={{ 
-              width: '44px', height: '44px', backgroundColor: 'var(--md-sys-color-on-secondary-container)', 
-              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white'
-            }}>
-              <MessageSquare size={20} />
-            </div>
-            <div style={{ flex: 1 }}>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)' }}>Ask a Mentor</h4>
-              <p style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8 }}>Get your doubts cleared in 1-on-1 chats.</p>
-            </div>
-            <Star size={20} fill="var(--md-sys-color-on-secondary-container)" />
-          </motion.div>
+
 
           {/* Mentorship Circles */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>

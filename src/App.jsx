@@ -7,6 +7,7 @@ import MotivatingScreen from './screens/MotivatingScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LearnScreen from './screens/LearnScreen';
+import MentorFAB from './components/MentorFAB';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
@@ -63,6 +64,7 @@ function App() {
           onTabChange={setActiveTab}
         />
       )}
+      {currentScreen === 'dashboard' && <MentorFAB />}
     </AnimatePresence>
   );
 }
