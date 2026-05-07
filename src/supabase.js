@@ -26,7 +26,10 @@ export const logSwipe = async (cardId, cardTitle, result) => {
         }
       ]);
     
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase Insert Error:', error);
+      throw error;
+    }
     return data;
   } catch (error) {
     console.error('Error logging swipe:', error.message);

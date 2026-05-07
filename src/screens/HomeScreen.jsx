@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, LayoutGrid, Info, Rocket, Home, GraduationCap, TrendingUp, User, HeartHandshake, X } from 'lucide-react';
 
-const HomeScreen = () => {
+const HomeScreen = ({ userKnowledge, onTabChange }) => {
   const [selectedPop, setSelectedPop] = useState(null);
 
   const indexDetails = {
@@ -225,12 +225,16 @@ const HomeScreen = () => {
         opacity: selectedPop ? 0.4 : 1
       }}>
         {[
-          { icon: Home, label: 'Home', active: true },
-          { icon: GraduationCap, label: 'Learn' },
-          { icon: TrendingUp, label: 'Trade' },
-          { icon: User, label: 'Profile' }
+          { icon: Home, label: 'Home', id: 'home', active: true },
+          { icon: GraduationCap, label: 'Learn', id: 'learn' },
+          { icon: TrendingUp, label: 'Trade', id: 'trade' },
+          { icon: User, label: 'Profile', id: 'profile' }
         ].map((item) => (
-          <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+          <div 
+            key={item.label} 
+            onClick={() => onTabChange(item.id)}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}
+          >
             <div style={{ 
               backgroundColor: item.active ? 'var(--md-sys-color-secondary-container)' : 'transparent', 
               padding: '4px 20px', borderRadius: '16px',

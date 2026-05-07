@@ -5,9 +5,11 @@ import ExperienceScreen from './screens/ExperienceScreen';
 import SwipeScreen from './screens/SwipeScreen';
 import MotivatingScreen from './screens/MotivatingScreen';
 import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
+  const [activeTab, setActiveTab] = useState('home');
   const [userKnowledge, setUserKnowledge] = useState([]); // Store what they know
 
   const navigateTo = (screen) => {
@@ -28,7 +30,7 @@ function App() {
           onComplete={(knowledge, skipped) => {
             setUserKnowledge(knowledge);
             if (skipped) {
-              navigateTo('home');
+              navigateTo('dashboard');
             } else {
               navigateTo('motivating');
             }
@@ -38,11 +40,21 @@ function App() {
       {currentScreen === 'motivating' && (
         <MotivatingScreen 
           key="motivating" 
-          onNext={() => navigateTo('home')} 
+          onNext={() => navigateTo('dashboard')} 
         />
       )}
-      {currentScreen === 'home' && (
-        <HomeScreen key="home" userKnowledge={userKnowledge} />
+      {currentScreen === 'dashboard' && activeTab === 'home' && (
+        <HomeScreen 
+          key="home" 
+          userKnowledge={userKnowledge} 
+          onTabChange={setActiveTab}
+        />
+      )}
+      {currentScreen === 'dashboard' && activeTab === 'profile' && (
+        <ProfileScreen 
+          key="profile" 
+          onTabChange={setActiveTab}
+        />
       )}
     </AnimatePresence>
   );
