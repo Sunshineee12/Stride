@@ -66,10 +66,10 @@ const Card = ({ card, active, removeCard }) => {
       }}>
         💡
       </div>
-      <h2 style={{ fontSize: '1.8rem', fontWeight: 600, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}>
+      <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}>
         {card.title}
       </h2>
-      <p style={{ fontSize: '1.05rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, marginBottom: '24px' }}>
+      <p style={{ fontSize: '1rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, marginBottom: '24px' }}>
         {card.desc}
       </p>
       
@@ -179,18 +179,18 @@ const SwipeScreen = ({ onComplete }) => {
                 zIndex: 20,
               }}
             >
-              <div style={{ color: 'var(--md-sys-color-primary)', fontWeight: 'bold', fontSize: '12px', letterSpacing: '0.05em', marginBottom: '16px' }}>
-                A MOMENT TO LEARN
+              <div style={{ color: 'var(--md-sys-color-primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em', marginBottom: '16px' }}>
+                THIS WAS A NEW CONCEPT
               </div>
-              <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px', color: 'var(--md-sys-color-on-surface)' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '8px', color: 'var(--md-sys-color-on-surface)' }}>
                 {explanation.title}
               </h3>
-              <p style={{ fontSize: '15px', color: 'var(--md-sys-color-on-surface-variant)', marginBottom: '24px', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '1rem', color: 'var(--md-sys-color-on-surface-variant)', marginBottom: '24px', lineHeight: 1.5 }}>
                 {explanation.desc}
               </p>
               
               <div style={{ backgroundColor: 'var(--md-sys-color-primary-container)', padding: '16px', borderRadius: '16px', textAlign: 'left', marginBottom: '24px', color: 'var(--md-sys-color-on-primary-container)' }}>
-                <p style={{ fontSize: '14px', lineHeight: 1.4, fontStyle: 'italic' }}>
+                <p style={{ fontSize: '0.95rem', lineHeight: 1.4, fontStyle: 'italic' }}>
                   "{explanation.example}"
                 </p>
               </div>
@@ -200,30 +200,30 @@ const SwipeScreen = ({ onComplete }) => {
                 style={{
                   backgroundColor: 'var(--md-sys-color-primary)',
                   color: 'white',
-                  padding: '14px 32px',
+                  padding: '16px 32px',
                   borderRadius: '100px',
                   fontWeight: 600,
-                  fontSize: '15px',
+                  fontSize: '1rem',
                   border: 'none',
                   cursor: 'pointer',
                   width: '100%'
                 }}
               >
-                Embrace Knowledge
+                Got it
               </button>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 32px', marginTop: 'auto', marginBottom: '40px' }}>
-        <div style={{ textAlign: 'center', color: 'var(--md-sys-color-outline)', opacity: explanation ? 0.3 : 0.8 }}>
-          <div style={{ fontSize: '20px' }}>←</div>
-          <span style={{ fontSize: '11px', fontWeight: 600 }}>NEW STEP</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 24px', marginTop: 'auto', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', color: '#B71C1C', opacity: explanation ? 0.3 : 1 }}>
+          <div style={{ fontSize: '24px' }}>←</div>
+          <span style={{ fontSize: '12px', fontWeight: 'bold' }}>NEW</span>
         </div>
-        <div style={{ textAlign: 'center', color: 'var(--md-sys-color-primary)', opacity: explanation ? 0.3 : 0.8 }}>
-          <div style={{ fontSize: '20px' }}>→</div>
-          <span style={{ fontSize: '11px', fontWeight: 600 }}>FAMILIAR</span>
+        <div style={{ textAlign: 'center', color: '#1B5E20', opacity: explanation ? 0.3 : 1 }}>
+          <div style={{ fontSize: '24px' }}>→</div>
+          <span style={{ fontSize: '12px', fontWeight: 'bold' }}>KNOW IT</span>
         </div>
       </div>
     </motion.div>

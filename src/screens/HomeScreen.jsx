@@ -33,12 +33,12 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ 
-            width: '36px', height: '36px', 
+            width: '40px', height: '40px', 
             backgroundColor: 'var(--md-sys-color-primary-container)', 
-            borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+            borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
             color: 'var(--md-sys-color-on-primary-container)' 
           }}>
-            <TrendingUp size={18} />
+            <TrendingUp size={20} />
           </div>
           <h1 style={{ 
             fontSize: '1.1rem', 
@@ -49,14 +49,14 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
           }}>Stride</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button style={{ padding: '8px', color: 'var(--md-sys-color-on-surface-variant)' }}><Search size={20} /></button>
+          <button style={{ padding: '8px', color: 'var(--md-sys-color-on-surface-variant)' }}><Search size={22} /></button>
           <div style={{ 
-            width: '36px', height: '36px', 
+            width: '40px', height: '40px', 
             backgroundColor: 'var(--md-sys-color-secondary-container)', 
             borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', 
-            color: 'var(--md-sys-color-on-secondary-container)', fontWeight: 600, fontSize: '0.85rem'
+            color: 'var(--md-sys-color-on-secondary-container)', fontWeight: 500
           }}>
-            AS
+            S
           </div>
         </div>
       </header>
@@ -64,15 +64,15 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
       {/* Tabs (M3 style) */}
       <div style={{ display: 'flex', padding: '0 16px', marginBottom: '16px', opacity: selectedPop ? 0.4 : 1 }}>
         <div style={{ 
-          flex: 1, textAlign: 'center', padding: '12px 0', 
+          flex: 1, textAlign: 'center', padding: '14px 0', 
           borderBottom: '3px solid var(--md-sys-color-primary)', 
-          color: 'var(--md-sys-color-on-surface)', fontWeight: 600, fontSize: '0.9rem'
+          color: 'var(--md-sys-color-on-surface)', fontWeight: 600 
         }}>
           Explore
         </div>
         <div style={{ 
-          flex: 1, textAlign: 'center', padding: '12px 0', 
-          color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 500, fontSize: '0.9rem'
+          flex: 1, textAlign: 'center', padding: '14px 0', 
+          color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 500 
         }}>
           Portfolio
         </div>
@@ -91,19 +91,19 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
                 }}
                 style={{ 
                   backgroundColor: 'var(--md-sys-color-surface-container)', 
-                  borderRadius: '24px', 
+                  borderRadius: 'var(--md-sys-shape-corner-large)', 
                   padding: '16px', 
                   cursor: 'pointer',
                   zIndex: selectedPop === name ? 110 : 1,
                   position: 'relative',
-                  boxShadow: selectedPop === name ? '0 12px 24px rgba(103, 80, 164, 0.15)' : 'none',
-                  transition: 'all 0.3s ease',
-                  border: selectedPop === name ? '1px solid var(--md-sys-color-primary)' : '1px solid transparent'
+                  boxShadow: selectedPop === name ? '0 20px 40px rgba(103, 80, 164, 0.25)' : 'none',
+                  transition: 'box-shadow 0.3s ease',
+                  border: selectedPop === name ? '1px solid var(--md-sys-color-outline-variant)' : 'none'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>{name}</span>
-                  <Info size={12} color="var(--md-sys-color-primary)" />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>{name}</span>
+                  <Info size={14} color="var(--md-sys-color-primary)" />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
                   <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>
@@ -156,29 +156,29 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
           whileTap={{ scale: 0.99 }}
           style={{ 
             backgroundColor: 'var(--md-sys-color-secondary-container)', 
-            borderRadius: '24px', 
+            borderRadius: 'var(--md-sys-shape-corner-large)', 
             padding: '20px', marginBottom: '16px', 
             opacity: selectedPop ? 0.4 : 1
           }}
         >
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ 
-              width: '44px', height: '44px', 
+              width: '48px', height: '48px', 
               backgroundColor: 'var(--md-sys-color-primary)', 
               borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' 
             }}>
-              <HeartHandshake size={22} />
+              <HeartHandshake size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)' }}>Gently Explore</h3>
-              <p style={{ color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, fontSize: '0.85rem', lineHeight: 1.4 }}>Start your journey with supportive dummy coins.</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--md-sys-color-on-secondary-container)' }}>Learn without Risk</h3>
+              <p style={{ color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, fontSize: '0.85rem' }}>Start with dummy coins.</p>
             </div>
           </div>
           <button style={{ 
             backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%', fontSize: '0.9rem'
+            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%' 
           }}>
-            Begin My Path
+            Try Now
           </button>
         </motion.div>
 
@@ -186,7 +186,7 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
           whileTap={{ scale: 0.99 }}
           style={{ 
             backgroundColor: 'var(--md-sys-color-surface-container-high)', 
-            borderRadius: '24px', 
+            borderRadius: 'var(--md-sys-shape-corner-large)', 
             padding: '20px', 
             opacity: selectedPop ? 0.4 : 1,
             border: '1px solid var(--md-sys-color-outline-variant)'
@@ -194,24 +194,24 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
         >
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
             <div style={{ 
-              width: '44px', height: '44px', 
+              width: '48px', height: '48px', 
               backgroundColor: 'var(--md-sys-color-primary-container)', 
               borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
               color: 'var(--md-sys-color-on-primary-container)' 
             }}>
-              <Rocket size={22} />
+              <Rocket size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Your First Step</h3>
-              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.85rem', lineHeight: 1.4 }}>Ready to nurture and grow your future wealth?</p>
+              <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--md-sys-color-on-surface)' }}>First Trade</h3>
+              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.85rem' }}>Ready to grow wealth?</p>
             </div>
           </div>
           <button style={{ 
             backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%', fontSize: '0.9rem',
-            boxShadow: '0 4px 12px rgba(103, 80, 164, 0.15)'
+            padding: '12px', borderRadius: '100px', fontWeight: 600, width: '100%',
+            boxShadow: '0 4px 12px rgba(103, 80, 164, 0.2)'
           }}>
-            Discover Opportunities
+            Find Stocks
           </button>
         </motion.div>
       </div>

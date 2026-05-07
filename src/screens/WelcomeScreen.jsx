@@ -34,10 +34,10 @@ const WelcomeScreen = ({ onNext }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           style={{ 
-            fontSize: '32px', 
+            fontSize: '2rem', 
             fontWeight: 700, 
-            marginBottom: '12px', 
-            letterSpacing: '0.01em', 
+            marginBottom: '16px', 
+            letterSpacing: '0.02em', 
             color: 'var(--md-sys-color-primary)',
             textTransform: 'uppercase'
           }}
@@ -49,9 +49,9 @@ const WelcomeScreen = ({ onNext }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          style={{ fontSize: '18px', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, maxWidth: '280px' }}
+          style={{ fontSize: '1.1rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, maxWidth: '280px' }}
         >
-          Your gentle guide to building a confident future.
+          Taking your first stride towards financial confidence.
         </motion.p>
       </div>
 
@@ -69,15 +69,15 @@ const WelcomeScreen = ({ onNext }) => {
             color: 'white', 
             padding: '16px 32px', 
             borderRadius: '100px', 
-            fontSize: '16px', 
+            fontSize: '1rem', 
             fontWeight: 600, 
             width: '80%', 
             border: 'none', 
             cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(103, 80, 164, 0.15)'
+            boxShadow: '0 8px 24px rgba(103, 80, 164, 0.2)'
           }}
         >
-          Begin Your Path
+          Get Started
         </button>
       </motion.div>
     </motion.div>

@@ -42,10 +42,10 @@ const MotivatingScreen = ({ onNext }) => {
           <Sparkles size={24} />
         </motion.div>
 
-        <h2 style={{ fontSize: '2.5rem', fontWeight: 600, marginBottom: '16px', letterSpacing: '-0.02em', color: 'var(--md-sys-color-on-primary-container)' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 600, marginBottom: '16px', letterSpacing: '-0.02em', color: 'var(--md-sys-color-on-primary-container)' }}>
           You did it!
         </h2>
-        <p style={{ fontSize: '1.2rem', opacity: 0.8, lineHeight: 1.5, maxWidth: '280px', margin: '0 auto' }}>
+        <p style={{ fontSize: '1.1rem', opacity: 0.8, lineHeight: 1.5, maxWidth: '280px', margin: '0 auto' }}>
           Taking the first step is the hardest part. We're so proud of you for showing up.
         </p>
       </motion.div>
@@ -63,7 +63,7 @@ const MotivatingScreen = ({ onNext }) => {
             color: 'white', 
             padding: '16px 32px', 
             borderRadius: '100px', 
-            fontSize: '1.15rem', 
+            fontSize: '1rem', 
             fontWeight: 600, 
             width: '100%', 
             border: 'none', 
