@@ -40,7 +40,13 @@ const HomeScreen = () => {
           }}>
             <TrendingUp size={20} />
           </div>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 500, color: 'var(--md-sys-color-on-surface)' }}>Stride</h1>
+          <h1 style={{ 
+            fontSize: '1.2rem', 
+            fontWeight: 700, 
+            color: 'var(--md-sys-color-on-surface)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em'
+          }}>Stride</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button style={{ padding: '8px', color: 'var(--md-sys-color-on-surface-variant)' }}><Search size={22} /></button>
