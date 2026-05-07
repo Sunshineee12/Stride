@@ -30,7 +30,7 @@ const Card = ({ card, active, removeCard }) => {
         position: 'absolute',
         top: 0,
         width: '100%',
-        height: '460px', /* Increased height to fit the example text cleanly */
+        height: '400px',
         backgroundColor: 'white',
         borderRadius: '32px',
         boxShadow: '0 12px 40px rgba(0,0,0,0.1)',
@@ -71,14 +71,7 @@ const Card = ({ card, active, removeCard }) => {
         {card.desc}
       </p>
       
-      <div style={{ backgroundColor: 'var(--bg-color)', padding: '16px', borderRadius: '16px', border: '1px solid var(--primary-light)', width: '100%' }}>
-        <p style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700, color: 'var(--primary-dark)', marginBottom: '6px' }}>
-          Real Life Example
-        </p>
-        <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: 1.4, fontStyle: 'italic' }}>
-          "{card.example}"
-        </p>
-      </div>
+
 
       {/* Helper text overlay */}
       <motion.div style={{ position: 'absolute', bottom: '24px', left: '20px', color: '#ff6b6b', fontWeight: 'bold', opacity: useTransform(x, [-100, -50], [1, 0]) }}>
@@ -94,17 +87,34 @@ const Card = ({ card, active, removeCard }) => {
 const SwipeScreen = ({ onComplete }) => {
   const [cards, setCards] = useState(CARD_DATA);
   const [knownItems, setKnownItems] = useState([]);
+  const [explanation, setExplanation] = useState(null);
 
   const removeCard = (id, result) => {
+    const card = cards.find(c => c.id === id);
+    
     if (result === 'known') {
-      const card = cards.find(c => c.id === id);
       setKnownItems(prev => [...prev, card.title]);
+      processRemoval(id);
+    } else {
+      setExplanation(card);
+      processRemoval(id);
     }
-    
-    setCards((prev) => prev.filter((c) => c.id !== id));
-    
-    if (cards.length === 1) {
-      setTimeout(() => onComplete(knownItems), 500);
+  };
+
+  const processRemoval = (id) => {
+    setCards((prev) => {
+      const newCards = prev.filter((c) => c.id !== id);
+      if (newCards.length === 0 && !explanation) {
+        setTimeout(() => onComplete(knownItems), 500);
+      }
+      return newCards;
+    });
+  };
+
+  const handleCloseExplanation = () => {
+    setExplanation(null);
+    if (cards.length === 0) {
+      setTimeout(() => onComplete(knownItems), 300);
     }
   };
 
@@ -122,30 +132,81 @@ const SwipeScreen = ({ onComplete }) => {
         </p>
       </div>
 
-      <div style={{ position: 'relative', width: '100%', height: '480px', marginTop: '10px' }}>
+      <div style={{ position: 'relative', width: '100%', height: '440px', marginTop: '10px' }}>
         <AnimatePresence>
           {cards.map((card, index) => (
             <Card 
               key={card.id} 
               card={card} 
-              active={index === cards.length - 1} 
+              active={index === cards.length - 1 && !explanation} 
               removeCard={removeCard} 
             />
           ))}
         </AnimatePresence>
-        {cards.length === 0 && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: 'var(--text-light)' }}>
-            Preparing your dashboard...
-          </div>
-        )}
+        
+        <AnimatePresence>
+          {explanation && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: -20 }}
+              style={{
+                position: 'absolute',
+                top: 0,
+                width: '100%',
+                backgroundColor: 'white',
+                borderRadius: '32px',
+                boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+                padding: '32px',
+                textAlign: 'center',
+                zIndex: 20,
+                border: '2px solid var(--primary-light)'
+              }}
+            >
+              <div style={{ color: '#ff6b6b', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em', marginBottom: '16px' }}>
+                THIS WAS A NEW CONCEPT
+              </div>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '8px', color: 'var(--primary-dark)' }}>
+                {explanation.title}
+              </h3>
+              <p style={{ fontSize: '1rem', color: 'var(--text-dark)', marginBottom: '24px', lineHeight: 1.5 }}>
+                {explanation.desc}
+              </p>
+              
+              <div style={{ backgroundColor: 'var(--bg-color)', padding: '16px', borderRadius: '16px', textAlign: 'left', marginBottom: '24px' }}>
+                <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '8px' }}>💡</span>
+                <p style={{ fontSize: '0.95rem', color: 'var(--text-dark)', lineHeight: 1.4, fontStyle: 'italic' }}>
+                  "{explanation.example}"
+                </p>
+              </div>
+
+              <button 
+                onClick={handleCloseExplanation}
+                style={{
+                  backgroundColor: 'var(--primary)',
+                  color: 'white',
+                  padding: '14px 32px',
+                  borderRadius: '100px',
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  width: '100%'
+                }}
+              >
+                Got it
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 20px', marginTop: 'auto', marginBottom: '40px' }}>
-        <div style={{ textAlign: 'center', color: '#ff6b6b' }}>
+        <div style={{ textAlign: 'center', color: '#ff6b6b', opacity: explanation ? 0.3 : 1 }}>
           <div style={{ fontSize: '24px' }}>←</div>
           <span style={{ fontSize: '12px', fontWeight: 'bold' }}>NEW</span>
         </div>
-        <div style={{ textAlign: 'center', color: '#51cf66' }}>
+        <div style={{ textAlign: 'center', color: '#51cf66', opacity: explanation ? 0.3 : 1 }}>
           <div style={{ fontSize: '24px' }}>→</div>
           <span style={{ fontSize: '12px', fontWeight: 'bold' }}>KNOW IT</span>
         </div>

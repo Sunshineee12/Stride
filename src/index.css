@@ -33,12 +33,12 @@ body {
 
 /* 
   Mobile-first constraint for desktop view.
-  Exact dimensions requested: 402x874
+  Exact dimensions requested: 393x852
 */
 #root {
   width: 100%;
-  width: 402px;
-  height: 874px;
+  width: 393px;
+  height: 852px;
   background-color: var(--bg-color);
   overflow: hidden;
   position: relative;
