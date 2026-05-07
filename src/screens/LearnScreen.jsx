@@ -25,7 +25,7 @@ const LearnScreen = ({ onTabChange }) => {
           padding: '24px 20px 16px', 
           backgroundColor: 'var(--md-sys-color-surface)'
         }}>
-          <h1 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Academy</h1>
+          <h1 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Learn & Earn</h1>
           <div style={{ 
             display: 'flex', alignItems: 'center', gap: '6px', 
             backgroundColor: 'var(--md-sys-color-secondary-container)', 
