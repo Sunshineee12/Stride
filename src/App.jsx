@@ -25,9 +25,13 @@ function App() {
       {currentScreen === 'swipe' && (
         <SwipeScreen 
           key="swipe" 
-          onComplete={(knowledge) => {
+          onComplete={(knowledge, skipped) => {
             setUserKnowledge(knowledge);
-            navigateTo('motivating');
+            if (skipped) {
+              navigateTo('home');
+            } else {
+              navigateTo('motivating');
+            }
           }} 
         />
       )}

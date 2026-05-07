@@ -105,7 +105,7 @@ const SwipeScreen = ({ onComplete }) => {
     setCards((prev) => {
       const newCards = prev.filter((c) => c.id !== id);
       if (newCards.length === 0 && !explanation) {
-        setTimeout(() => onComplete(knownItems), 500);
+        setTimeout(() => onComplete(knownItems, false), 500);
       }
       return newCards;
     });
@@ -114,7 +114,7 @@ const SwipeScreen = ({ onComplete }) => {
   const handleCloseExplanation = () => {
     setExplanation(null);
     if (cards.length === 0) {
-      setTimeout(() => onComplete(knownItems), 300);
+      setTimeout(() => onComplete(knownItems, false), 300);
     }
   };
 
@@ -127,7 +127,7 @@ const SwipeScreen = ({ onComplete }) => {
     >
       <div style={{ position: 'absolute', top: '24px', right: '24px', zIndex: 50 }}>
         <button 
-          onClick={() => onComplete(knownItems)}
+          onClick={() => onComplete(knownItems, true)}
           style={{ 
             background: 'none', border: 'none', color: 'var(--text-light)', 
             fontSize: '1rem', fontWeight: 600, cursor: 'pointer' 
@@ -137,7 +137,7 @@ const SwipeScreen = ({ onComplete }) => {
         </button>
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '30px' }}>
+      <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '30px' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-dark)' }}>Let's gauge your knowledge</h2>
         <p style={{ color: 'var(--text-light)', marginTop: '8px' }}>
           Swipe right if you know it, left if it's new.

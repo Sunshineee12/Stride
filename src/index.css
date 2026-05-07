@@ -33,12 +33,11 @@ body {
 
 /* 
   Mobile-first constraint for desktop view.
-  Exact dimensions requested: 393x852
+  Exact dimensions requested: 393x852 for desktop preview, full responsive on mobile.
 */
 #root {
   width: 100%;
-  width: 393px;
-  height: 852px;
+  height: 100vh;
   background-color: var(--bg-color);
   overflow: hidden;
   position: relative;
@@ -47,6 +46,8 @@ body {
 
 @media (min-width: 481px) {
   #root {
+    width: 393px;
+    height: 852px;
     border-radius: 44px; /* iPhone like curves */
     border: 12px solid #ffffff;
     box-shadow: 0 30px 80px rgba(0,0,0,0.12), inset 0 0 0 2px rgba(0,0,0,0.05);
