@@ -218,11 +218,12 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
 
       {/* Navigation Bar (M3 style) */}
       <div style={{ 
-        position: 'absolute', bottom: 0, left: 0, width: '100%', 
+        position: 'sticky', bottom: 0, left: 0, width: '100%', 
         backgroundColor: 'var(--md-sys-color-surface-container)', 
         display: 'flex', justifyContent: 'space-around', padding: '12px 0 24px',
         zIndex: 50,
-        opacity: selectedPop ? 0.4 : 1
+        opacity: selectedPop ? 0.4 : 1,
+        boxShadow: '0 -4px 20px rgba(0,0,0,0.05)'
       }}>
         {[
           { icon: Home, label: 'Home', id: 'home', active: true },
