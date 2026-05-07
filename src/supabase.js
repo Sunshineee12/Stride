@@ -1,12 +1,19 @@
 import { createClient } from '@supabase/supabase-js';
 
 // These should be in .env for security, but providing placeholders for setup
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'YOUR_SUPABASE_URL';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Only initialize if keys are provided to prevent crash
+export const supabase = (supabaseUrl && supabaseAnonKey) 
+  ? createClient(supabaseUrl, supabaseAnonKey) 
+  : null;
 
 export const logSwipe = async (cardId, cardTitle, result) => {
+  if (!supabase) {
+    console.warn('Supabase not initialized. Swipe not logged.');
+    return null;
+  }
   try {
     const { data, error } = await supabase
       .from('quiz_responses')
