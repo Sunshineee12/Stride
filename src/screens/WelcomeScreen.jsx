@@ -3,6 +3,13 @@ import { motion } from 'framer-motion';
 import { TrendingUp } from 'lucide-react';
 
 const WelcomeScreen = ({ onNext }) => {
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      onNext();
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [onNext]);
+
   return (
     <motion.div 
       className="screen-container text-center"
@@ -55,31 +62,18 @@ const WelcomeScreen = ({ onNext }) => {
         </motion.p>
       </div>
 
+      {/* Progress Indicator for auto-advance */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-        className="mt-auto"
-        style={{ marginBottom: '64px', display: 'flex', justifyContent: 'center' }}
-      >
-        <button 
-          onClick={onNext} 
-          style={{ 
-            backgroundColor: 'var(--md-sys-color-primary)', 
-            color: 'white', 
-            padding: '16px 32px', 
-            borderRadius: '100px', 
-            fontSize: '1rem', 
-            fontWeight: 600, 
-            width: '80%', 
-            border: 'none', 
-            cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(103, 80, 164, 0.2)'
-          }}
-        >
-          Get Started
-        </button>
-      </motion.div>
+        initial={{ width: 0 }}
+        animate={{ width: '40px' }}
+        transition={{ delay: 1, duration: 1.5 }}
+        style={{ 
+          height: '4px', 
+          backgroundColor: 'var(--md-sys-color-primary)', 
+          borderRadius: '2px',
+          marginBottom: '64px'
+        }}
+      />
     </motion.div>
   );
 };

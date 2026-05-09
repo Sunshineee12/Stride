@@ -18,10 +18,10 @@ const QuoteSplash = ({ onComplete }) => {
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     setCurrentQuote(randomQuote);
 
-    // Auto-advance after 3 seconds
+    // Auto-advance after 2 seconds
     const timer = setTimeout(() => {
       onComplete();
-    }, 3500);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
