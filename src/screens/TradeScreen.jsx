@@ -61,21 +61,24 @@ const TradeScreen = ({ onTabChange }) => {
           <div>
             <h1 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Trade</h1>
             <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)' }}>Manage your investments and history.</p>
+            <motion.div 
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginTop: '12px' }}
+              onClick={() => setShowDailyGoal(true)}
+              animate={!showDailyGoal ? { scale: [1, 1.05, 1] } : {}}
+              transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+            >
+              <div style={{ 
+                width: '32px', height: '32px', borderRadius: '10px', 
+                backgroundColor: 'var(--md-sys-color-primary-container)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--md-sys-color-primary)'
+              }}>
+                <Target size={18} />
+              </div>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--md-sys-color-primary)' }}>Daily Goal</span>
+            </motion.div>
           </div>
-          <button 
-            onClick={() => setShowDailyGoal(true)}
-            style={{ 
-              width: '40px', height: '40px', borderRadius: '12px', 
-              backgroundColor: 'var(--md-sys-color-secondary-container)', 
-              display: 'flex', alignItems: 'center', justifyContent: 'center', 
-              color: 'var(--md-sys-color-on-secondary-container)', border: 'none', cursor: 'pointer'
-            }}
-          >
-            <Target size={20} />
-          </button>
         </header>
-
-
 
         {/* Search Bar */}
         <div style={{ padding: '0 20px 16px', display: 'flex', gap: '12px' }}>

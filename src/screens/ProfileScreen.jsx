@@ -59,7 +59,7 @@ const ProfileScreen = ({ onTabChange }) => {
           {/* Stride Coins Wallet */}
           <div style={{ 
             backgroundColor: 'var(--md-sys-color-primary-container)', 
-            padding: '24px', borderRadius: '28px', marginBottom: '24px',
+            padding: '24px', borderRadius: '28px', marginBottom: '16px',
             color: 'var(--md-sys-color-on-primary-container)',
             boxShadow: '0 8px 24px rgba(103, 80, 164, 0.15)'
           }}>
@@ -86,6 +86,29 @@ const ProfileScreen = ({ onTabChange }) => {
             >
               Redeem Rewards
             </button>
+          </div>
+
+          {/* Daily Streak (Zeigarnik Effect) */}
+          <div style={{ 
+            backgroundColor: 'var(--md-sys-color-surface-container-low)', 
+            padding: '16px 20px', borderRadius: '24px', marginBottom: '24px',
+            display: 'flex', alignItems: 'center', gap: '16px',
+            border: '1px solid var(--md-sys-color-outline-variant)'
+          }}>
+            <div style={{ 
+              width: '44px', height: '44px', borderRadius: '50%', 
+              backgroundColor: 'var(--md-sys-color-secondary-container)', 
+              display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--md-sys-color-on-secondary-container)'
+            }}>
+              <Award size={20} />
+            </div>
+            <div style={{ flex: 1 }}>
+              <p style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Knowledge Streak</p>
+              <div style={{ width: '100%', height: '6px', backgroundColor: 'var(--md-sys-color-surface-container-highest)', borderRadius: '10px', marginTop: '6px', overflow: 'hidden' }}>
+                <div style={{ width: '60%', height: '100%', backgroundColor: 'var(--md-sys-color-primary)', borderRadius: '10px' }} />
+              </div>
+            </div>
+            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>3/5</span>
           </div>
 
           {/* Your Self-Care Corner */}
