@@ -8,9 +8,27 @@ const TradeScreen = ({ onTabChange }) => {
   const [showDailyGoal, setShowDailyGoal] = useState(true);
 
   const suggestions = {
-    low: { name: 'NIFTY BEES (ETF)', risk: 'Safe & Steady', price: '₹10', icon: ShieldCheck },
-    med: { name: 'TATA POWER', risk: 'Balanced Growth', price: '₹15', icon: Info },
-    high: { name: 'ZOMATO', risk: 'High Volatility', price: '₹5', icon: Zap }
+    low: { 
+      name: 'NIFTY BEES (ETF)', 
+      risk: 'Steady & Safe', 
+      desc: 'Perfect for beginners. It tracks the top 50 companies in India.',
+      price: '₹10 investment',
+      icon: ShieldCheck 
+    },
+    med: { 
+      name: 'TATA POWER', 
+      risk: 'Balanced Growth', 
+      desc: 'A mix of stability and growth from a trusted energy leader.',
+      price: '₹15 investment',
+      icon: Info 
+    },
+    high: { 
+      name: 'ZOMATO', 
+      risk: 'High Reward potential', 
+      desc: 'Fast-moving stock. Great for learning how price jumps happen.',
+      price: '₹5 investment',
+      icon: Zap 
+    }
   };
 
   const trades = [
@@ -297,17 +315,9 @@ const TradeScreen = ({ onTabChange }) => {
               </button>
 
               <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                <div style={{ 
-                  width: '44px', height: '44px', borderRadius: '12px', 
-                  backgroundColor: 'var(--md-sys-color-primary-container)', 
-                  margin: '0 auto 12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'var(--md-sys-color-primary)'
-                }}>
-                  <Target size={22} />
-                </div>
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Daily Goal</h2>
-                <p style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-on-surface-variant)', marginTop: '4px', lineHeight: 1.4 }}>
-                  Learn by doing. Small steps lead to big results.
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--md-sys-color-on-surface)' }}>Daily Learning Goal</h2>
+                <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)', marginTop: '8px', lineHeight: 1.5 }}>
+                  The best way to learn is by doing. Pick a small task for today.
                 </p>
               </div>
 
@@ -341,27 +351,30 @@ const TradeScreen = ({ onTabChange }) => {
 
               <div style={{ 
                 backgroundColor: 'var(--md-sys-color-secondary-container)', 
-                borderRadius: '20px', padding: '16px', textAlign: 'center'
+                borderRadius: '24px', padding: '20px', textAlign: 'center'
               }}>
-                <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginBottom: '4px' }}>
-                  Suggestion
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginBottom: '6px' }}>
+                  Today's Suggestion
                 </p>
-                <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)' }}>
                   {suggestions[riskLevel].name}
                 </h3>
-                <p style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.9 }}>
+                <p style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.9, marginTop: '4px', fontWeight: 500 }}>
                   {suggestions[riskLevel].risk} • {suggestions[riskLevel].price}
+                </p>
+                <p style={{ fontSize: '0.7rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.7, marginTop: '8px', fontStyle: 'italic', lineHeight: 1.4 }}>
+                  {suggestions[riskLevel].desc}
                 </p>
                 
                 <button 
                   onClick={() => setShowDailyGoal(false)}
                   style={{ 
-                    marginTop: '12px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-                    width: '100%', padding: '10px', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 600, border: 'none',
+                    marginTop: '16px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+                    width: '100%', padding: '12px', borderRadius: '100px', fontSize: '0.9rem', fontWeight: 600, border: 'none',
                     cursor: 'pointer'
                   }}
                 >
-                  Get Started
+                  Start Learning
                 </button>
               </div>
             </motion.div>
