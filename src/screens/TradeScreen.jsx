@@ -10,23 +10,20 @@ const TradeScreen = ({ onTabChange }) => {
   const suggestions = {
     low: { 
       name: 'NIFTY BEES (ETF)', 
-      risk: 'Steady & Safe', 
+      risk: 'Guaranteed Return', 
       desc: 'Perfect for beginners. It tracks the top 50 companies in India.',
-      price: '₹10 investment',
       icon: ShieldCheck 
     },
     med: { 
       name: 'TATA POWER', 
-      risk: 'Balanced Growth', 
+      risk: 'Balanced Risk', 
       desc: 'A mix of stability and growth from a trusted energy leader.',
-      price: '₹15 investment',
       icon: Info 
     },
     high: { 
       name: 'ZOMATO', 
-      risk: 'High Reward potential', 
+      risk: 'Higher Risk', 
       desc: 'Fast-moving stock. Great for learning how price jumps happen.',
-      price: '₹5 investment',
       icon: Zap 
     }
   };
@@ -351,18 +348,23 @@ const TradeScreen = ({ onTabChange }) => {
 
               <div style={{ 
                 backgroundColor: 'var(--md-sys-color-secondary-container)', 
-                borderRadius: '24px', padding: '20px', textAlign: 'center'
+                borderRadius: '24px', padding: '16px 20px', textAlign: 'center'
               }}>
-                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginBottom: '6px' }}>
+                <p style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.6, marginBottom: '2px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Today's Suggestion
                 </p>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)' }}>
+                <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)' }}>
                   {suggestions[riskLevel].name}
                 </h3>
-                <p style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.9, marginTop: '4px', fontWeight: 500 }}>
-                  {suggestions[riskLevel].risk} • {suggestions[riskLevel].price}
-                </p>
-                <p style={{ fontSize: '0.7rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.7, marginTop: '8px', fontStyle: 'italic', lineHeight: 1.4 }}>
+                <div style={{ 
+                  display: 'inline-block', padding: '2px 8px', borderRadius: '4px', 
+                  backgroundColor: 'rgba(0,0,0,0.05)', marginTop: '4px'
+                }}>
+                  <p style={{ fontSize: '0.7rem', color: 'var(--md-sys-color-on-secondary-container)', fontWeight: 600 }}>
+                    {suggestions[riskLevel].risk}
+                  </p>
+                </div>
+                <p style={{ fontSize: '0.7rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginTop: '8px', lineHeight: 1.4 }}>
                   {suggestions[riskLevel].desc}
                 </p>
                 
@@ -370,8 +372,8 @@ const TradeScreen = ({ onTabChange }) => {
                   onClick={() => setShowDailyGoal(false)}
                   style={{ 
                     marginTop: '16px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-                    width: '100%', padding: '12px', borderRadius: '100px', fontSize: '0.9rem', fontWeight: 600, border: 'none',
-                    cursor: 'pointer'
+                    width: '100%', padding: '10px', borderRadius: '100px', fontSize: '0.8rem', fontWeight: 600, border: 'none',
+                    cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
                   }}
                 >
                   Start Learning
