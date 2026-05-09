@@ -1,16 +1,16 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Settings, Wallet, Gift, TrendingUp, ChevronRight, LogOut, Award, HeartPulse, Stethoscope, Pills, Sparkles, Microscope, Coins, CheckCircle2, X, Info, Home, GraduationCap } from 'lucide-react';
+import { User, Settings, Wallet, Gift, TrendingUp, ChevronRight, LogOut, Award, HeartPulse, Stethoscope, Pill, Sparkles, Microscope, Coins, CheckCircle2, X, Info, Home, GraduationCap } from 'lucide-react';
 
 const ProfileScreen = ({ onTabChange }) => {
   const [showRedeem, setShowRedeem] = React.useState(false);
   const [conversionCoins, setConversionCoins] = React.useState(1000);
   
   const rewards = [
-    { id: 1, name: 'Gynec Consultation', price: 2000, icon: Stethoscope, color: '#FF80AB' },
-    { id: 2, name: '20% off Medicines', price: 500, icon: Pills, color: '#4FC3F7' },
-    { id: 3, name: 'Wellness Spa Session', price: 3500, icon: Sparkles, color: '#9575CD' },
-    { id: 4, name: 'Health Diagnostics', price: 4500, icon: Microscope, color: '#81C784' },
+    { id: 1, name: 'Gynec Consultation', price: 2000, icon: Stethoscope },
+    { id: 2, name: '20% off Medicines', price: 500, icon: Pill },
+    { id: 3, name: 'Wellness Spa Session', price: 3500, icon: Sparkles },
+    { id: 4, name: 'Health Diagnostics', price: 4500, icon: Microscope },
   ];
 
   const estimatedCash = (conversionCoins / 100) * 10;
@@ -56,18 +56,7 @@ const ProfileScreen = ({ onTabChange }) => {
             </div>
           </div>
 
-          {/* Rewards Section (M3 style) */}
-          <div style={{ marginBottom: '32px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Your Self-Care Corner</h2>
-              <span style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-primary)', fontWeight: 600 }}>Earned: 1,240 🪙</span>
-            </div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)', marginBottom: '16px', marginTop: '-12px' }}>
-              Wealth is more than just money. Invest in your wellbeing.
-            </p>
-          </div>
-
-          {/* Dummy Coins Wallet */}
+          {/* Stride Coins Wallet */}
           <div style={{ 
             backgroundColor: 'var(--md-sys-color-primary-container)', 
             padding: '24px', borderRadius: '28px', marginBottom: '24px',
@@ -76,7 +65,7 @@ const ProfileScreen = ({ onTabChange }) => {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
-                <p style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '4px' }}>Dummy Coins Earned</p>
+                <p style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '4px' }}>Stride Coins Earned</p>
                 <h2 style={{ fontSize: '1.5rem', fontWeight: 800 }}>5,240 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>🪙</span></h2>
               </div>
               <div style={{ 
@@ -99,10 +88,14 @@ const ProfileScreen = ({ onTabChange }) => {
             </button>
           </div>
 
-          {/* Rewards Section */}
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '16px', color: 'var(--md-sys-color-on-surface)' }}>
-            Real Reward Store
-          </h3>
+          {/* Your Self-Care Corner */}
+          <div style={{ marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)', marginBottom: '8px' }}>Your Self-Care Corner</h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)', marginBottom: '16px' }}>
+              Wealth is more than just money. Invest in your wellbeing.
+            </p>
+          </div>
+
           <div style={{ display: 'flex', gap: '12px', marginBottom: '32px', overflowX: 'auto', paddingBottom: '12px', scrollSnapType: 'x mandatory' }}>
             {rewards.map(item => (
               <div key={item.id} style={{ 
@@ -111,14 +104,13 @@ const ProfileScreen = ({ onTabChange }) => {
                 scrollSnapAlign: 'start', border: '1px solid var(--md-sys-color-outline-variant)'
               }}>
                 <div style={{ 
-                  width: '56px', height: '56px', backgroundColor: 'white', 
+                  width: '56px', height: '56px', backgroundColor: 'var(--md-sys-color-secondary-container)', 
                   borderRadius: '16px', margin: '0 auto 12px', display: 'flex', 
-                  alignItems: 'center', justifyContent: 'center', color: item.color,
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                  alignItems: 'center', justifyContent: 'center', color: 'var(--md-sys-color-on-secondary-container)'
                 }}>
                   <item.icon size={28} />
                 </div>
-                <p style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '4px', color: 'var(--md-sys-color-on-surface)' }}>{item.name}</p>
+                <p style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '4px', color: 'var(--md-sys-color-on-surface)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</p>
                 <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-primary)', fontWeight: 800 }}>{item.price} 🪙</p>
               </div>
             ))}
