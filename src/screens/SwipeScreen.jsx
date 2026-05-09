@@ -14,8 +14,12 @@ const Card = ({ card, active, removeCard }) => {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-15, 15]);
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
-  const bgKnown = useTransform(x, [0, 150], ['rgba(255, 255, 255, 0)', 'rgba(230, 250, 230, 0.8)']);
-  const bgNew = useTransform(x, [-150, 0], ['rgba(250, 230, 230, 0.8)', 'rgba(255, 255, 255, 0)']);
+  
+  // Dynamic background colors during swipe
+  const bgKnown = useTransform(x, [0, 150], ['rgba(255, 255, 255, 0)', 'rgba(76, 175, 80, 0.15)']);
+  const bgNew = useTransform(x, [-150, 0], ['rgba(244, 67, 54, 0.15)', 'rgba(255, 255, 255, 0)']);
+  const borderKnown = useTransform(x, [0, 150], ['rgba(0,0,0,0)', 'rgba(76, 175, 80, 0.4)']);
+  const borderNew = useTransform(x, [-150, 0], ['rgba(244, 67, 54, 0.4)', 'rgba(0,0,0,0)']);
 
   const handleDragEnd = (event, info) => {
     if (info.offset.x > 100) {
@@ -31,23 +35,25 @@ const Card = ({ card, active, removeCard }) => {
         position: 'absolute',
         top: 0,
         width: '100%',
-        height: '400px',
+        height: '420px',
         backgroundColor: 'var(--md-sys-color-surface-container-high)',
-        borderRadius: 'var(--md-sys-shape-corner-large)',
-        boxShadow: active ? '0 12px 40px rgba(0,0,0,0.08)' : 'none',
+        borderRadius: '32px',
+        border: '1px solid var(--md-sys-color-outline-variant)',
+        boxShadow: active ? '0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.2) inset' : 'none',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '32px',
+        padding: '36px',
         textAlign: 'center',
         x,
         rotate,
         opacity: active ? opacity : 1,
         pointerEvents: active ? 'auto' : 'none',
         zIndex: active ? 10 : 1,
-        scale: active ? 1 : 0.95,
+        scale: active ? 1 : 0.94,
         y: active ? 0 : 20,
+        overflow: 'hidden'
       }}
       drag={active ? 'x' : false}
       dragConstraints={{ left: 0, right: 0 }}
@@ -55,30 +61,50 @@ const Card = ({ card, active, removeCard }) => {
       whileDrag={{ cursor: 'grabbing' }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
-      <motion.div style={{ position: 'absolute', inset: 0, borderRadius: 'var(--md-sys-shape-corner-large)', background: bgKnown, zIndex: -1 }} />
-      <motion.div style={{ position: 'absolute', inset: 0, borderRadius: 'var(--md-sys-shape-corner-large)', background: bgNew, zIndex: -1 }} />
+      <motion.div style={{ position: 'absolute', inset: 0, background: bgKnown, border: '2px solid', borderColor: borderKnown, borderRadius: '32px', zIndex: -1 }} />
+      <motion.div style={{ position: 'absolute', inset: 0, background: bgNew, border: '2px solid', borderColor: borderNew, borderRadius: '32px', zIndex: -1 }} />
+      
+      {/* Subtle Background Pattern */}
+      <div style={{ 
+        position: 'absolute', top: '-50px', right: '-50px', width: '200px', height: '200px', 
+        borderRadius: '100px', background: 'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
+        opacity: 0.1, zIndex: -1
+      }} />
       
       <div style={{ 
-        width: '64px', height: '64px', backgroundColor: 'var(--md-sys-color-primary-container)', 
-        borderRadius: '16px', marginBottom: '20px', display: 'flex', 
-        alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem',
-        color: 'var(--md-sys-color-on-primary-container)'
+        width: '72px', height: '72px', backgroundColor: 'var(--md-sys-color-primary-container)', 
+        borderRadius: '24px', marginBottom: '24px', display: 'flex', 
+        alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem',
+        color: 'var(--md-sys-color-on-primary-container)',
+        boxShadow: '0 8px 20px rgba(0,0,0,0.05)'
       }}>
         💡
       </div>
-      <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}>
+      <h2 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)', letterSpacing: '-0.02em' }}>
         {card.title}
       </h2>
-      <p style={{ fontSize: '1rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, marginBottom: '24px' }}>
+      <p style={{ fontSize: '1rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.6, marginBottom: '24px', fontWeight: 500 }}>
         {card.desc}
       </p>
       
 
-      {/* Helper text overlay */}
-      <motion.div style={{ position: 'absolute', bottom: '24px', left: '24px', color: '#B71C1C', fontWeight: 'bold', opacity: useTransform(x, [-100, -50], [1, 0]) }}>
+      {/* Helper text badges */}
+      <motion.div style={{ 
+        position: 'absolute', top: '24px', left: '24px', 
+        backgroundColor: '#FEE2E2', color: '#991B1B', 
+        padding: '6px 12px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 800,
+        letterSpacing: '0.05em', border: '1px solid #FECACA',
+        opacity: useTransform(x, [-100, -50], [1, 0]) 
+      }}>
         NEW INFO
       </motion.div>
-      <motion.div style={{ position: 'absolute', bottom: '24px', right: '24px', color: '#1B5E20', fontWeight: 'bold', opacity: useTransform(x, [50, 100], [0, 1]) }}>
+      <motion.div style={{ 
+        position: 'absolute', top: '24px', right: '24px', 
+        backgroundColor: '#DCFCE7', color: '#166534', 
+        padding: '6px 12px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 800,
+        letterSpacing: '0.05em', border: '1px solid #BBF7D0',
+        opacity: useTransform(x, [50, 100], [0, 1]) 
+      }}>
         I KNOW THIS
       </motion.div>
     </motion.div>
@@ -172,11 +198,13 @@ const SwipeScreen = ({ onComplete, userId, userLevel }) => {
                 top: 0,
                 width: '100%',
                 backgroundColor: 'var(--md-sys-color-surface-container-high)',
-                borderRadius: 'var(--md-sys-shape-corner-large)',
-                boxShadow: '0 12px 40px rgba(0,0,0,0.1)',
-                padding: '32px',
+                borderRadius: '32px',
+                border: '1px solid var(--md-sys-color-outline-variant)',
+                boxShadow: '0 24px 60px rgba(0,0,0,0.15)',
+                padding: '36px',
                 textAlign: 'center',
                 zIndex: 20,
+                overflow: 'hidden'
               }}
             >
               <div style={{ color: 'var(--md-sys-color-primary)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em', marginBottom: '16px' }}>

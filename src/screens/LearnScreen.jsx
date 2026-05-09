@@ -177,13 +177,11 @@ const LearnScreen = ({ onTabChange }) => {
                 {quizStep === 'question' ? (
                   <motion.div key="question" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                     <div style={{ 
-                      width: '64px', height: '64px', 
-                      background: 'linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary))', 
-                      borderRadius: '20px', marginBottom: '20px', display: 'flex', 
-                      alignItems: 'center', justifyContent: 'center', color: 'white',
-                      boxShadow: '0 8px 24px rgba(103, 80, 164, 0.2)'
+                      width: '56px', height: '56px', backgroundColor: 'var(--md-sys-color-primary-container)', 
+                      borderRadius: '16px', marginBottom: '24px', display: 'flex', 
+                      alignItems: 'center', justifyContent: 'center', color: 'var(--md-sys-color-primary)'
                     }}>
-                      <Trophy size={32} />
+                      <Trophy size={28} />
                     </div>
                     <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px', color: 'var(--md-sys-color-on-surface)' }}>
                       Daily Quiz
@@ -191,33 +189,19 @@ const LearnScreen = ({ onTabChange }) => {
                     <p style={{ fontSize: '1.05rem', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.5, marginBottom: '24px' }}>
                       {simplifiedQuiz.question}
                     </p>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       {simplifiedQuiz.options.map(opt => (
-                        <motion.button 
+                        <button 
                           key={opt.id}
-                          whileHover={{ scale: 1.02, backgroundColor: 'var(--md-sys-color-surface-container-highest)' }}
-                          whileTap={{ scale: 0.98 }}
                           onClick={() => handleOptionSelect(opt)}
                           style={{ 
-                            backgroundColor: 'var(--md-sys-color-surface-container-high)', padding: '18px 22px', 
-                            borderRadius: '24px', color: 'var(--md-sys-color-on-surface)', textAlign: 'left',
-                            display: 'flex', alignItems: 'center', gap: '16px',
-                            fontSize: '1rem', fontWeight: 600, border: '1.5px solid var(--md-sys-color-outline-variant)',
-                            boxShadow: '0 2px 10px rgba(0,0,0,0.03)',
-                            cursor: 'pointer'
+                            backgroundColor: 'var(--md-sys-color-surface-container-high)', padding: '16px', 
+                            borderRadius: '16px', color: 'var(--md-sys-color-on-surface)', textAlign: 'left',
+                            fontSize: '0.95rem', fontWeight: 500, border: '1px solid var(--md-sys-color-outline-variant)'
                           }}
                         >
-                          <div style={{ 
-                            minWidth: '32px', height: '32px', borderRadius: '12px', 
-                            backgroundColor: 'var(--md-sys-color-secondary-container)',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: '0.85rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)',
-                            boxShadow: 'inset 0 0 10px rgba(0,0,0,0.05)'
-                          }}>
-                            {opt.id.toUpperCase()}
-                          </div>
-                          <span style={{ flex: 1, lineHeight: 1.3 }}>{opt.text}</span>
-                        </motion.button>
+                          {opt.text}
+                        </button>
                       ))}
                     </div>
                   </motion.div>
