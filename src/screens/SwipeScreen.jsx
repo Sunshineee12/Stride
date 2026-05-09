@@ -85,7 +85,7 @@ const Card = ({ card, active, removeCard }) => {
   );
 };
 
-const SwipeScreen = ({ onComplete }) => {
+const SwipeScreen = ({ onComplete, userId, userLevel }) => {
   const [cards, setCards] = useState(CARD_DATA);
   const [knownItems, setKnownItems] = useState([]);
   const [explanation, setExplanation] = useState(null);
@@ -93,8 +93,8 @@ const SwipeScreen = ({ onComplete }) => {
   const removeCard = async (id, result) => {
     const card = cards.find(c => c.id === id);
     
-    // Log response to "super sql" (Supabase)
-    logSwipe(id, card.title, result);
+    // Log response to the new user_knowledge_stats table
+    logSwipe(userId, userLevel, card.title, result);
     
     if (result === 'known') {
       setKnownItems(prev => [...prev, card.title]);

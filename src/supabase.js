@@ -9,19 +9,20 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
   ? createClient(supabaseUrl, supabaseAnonKey) 
   : null;
 
-export const logSwipe = async (cardId, cardTitle, result) => {
+export const logSwipe = async (userId, userLevel, cardTitle, result) => {
   if (!supabase) {
     console.warn('Supabase not initialized. Swipe not logged.');
     return null;
   }
   try {
     const { data, error } = await supabase
-      .from('quiz_responses')
+      .from('user_knowledge_stats')
       .insert([
         { 
-          card_id: cardId, 
+          user_id: userId,
+          user_level: userLevel,
           card_title: cardTitle, 
-          result: result, // 'known' or 'new'
+          result: result === 'known' ? 'known' : 'unknown', 
           timestamp: new Date().toISOString()
         }
       ]);
@@ -33,7 +34,6 @@ export const logSwipe = async (cardId, cardTitle, result) => {
     return data;
   } catch (error) {
     console.error('Error logging swipe:', error.message);
-    // Silent fail to not interrupt UX
     return null;
   }
 };

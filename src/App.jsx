@@ -13,7 +13,12 @@ import MentorFAB from './components/MentorFAB';
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
   const [activeTab, setActiveTab] = useState('home');
-  const [userKnowledge, setUserKnowledge] = useState([]); // Store what they know
+  const [userKnowledge, setUserKnowledge] = useState([]); 
+  const [userLevel, setUserLevel] = useState('Beginner');
+  const [userId] = useState(() => {
+    // Generate a simple unique ID for this session if not using real auth
+    return crypto.randomUUID();
+  });
 
   const navigateTo = (screen) => {
     setCurrentScreen(screen);
@@ -25,11 +30,16 @@ function App() {
         <WelcomeScreen key="welcome" onNext={() => navigateTo('experience')} />
       )}
       {currentScreen === 'experience' && (
-        <ExperienceScreen key="experience" onNext={() => navigateTo('swipe')} />
+        <ExperienceScreen key="experience" onNext={(level) => {
+          setUserLevel(level);
+          navigateTo('swipe');
+        }} />
       )}
       {currentScreen === 'swipe' && (
         <SwipeScreen 
           key="swipe" 
+          userLevel={userLevel}
+          userId={userId}
           onComplete={(knowledge, skipped) => {
             setUserKnowledge(knowledge);
             if (skipped) {

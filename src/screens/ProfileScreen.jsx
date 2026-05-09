@@ -164,7 +164,6 @@ const ProfileScreen = ({ onTabChange }) => {
           </div>
         </div>
       </div>
-      </div>
 
       {/* Redeem Modal */}
       <AnimatePresence>
