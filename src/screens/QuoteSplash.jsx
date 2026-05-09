@@ -70,7 +70,7 @@ const QuoteSplash = ({ onComplete }) => {
         }}
       >
         "{currentQuote}"
-      </h2>
+      </motion.h2>
 
       <motion.div 
         initial={{ width: 0 }}

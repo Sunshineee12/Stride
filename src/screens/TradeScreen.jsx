@@ -362,7 +362,6 @@ const TradeScreen = ({ onTabChange }) => {
                   </p>
                 </div>
                 </div>
-              </div>
             </motion.div>
           </div>
         )}
