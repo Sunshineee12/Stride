@@ -1,16 +1,16 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Settings, Wallet, Gift, TrendingUp, ChevronRight, LogOut, Award, HeartPulse, Tablet, Smartphone, Headphones, Coins, CheckCircle2, X, Info, Home, GraduationCap } from 'lucide-react';
+import { User, Settings, Wallet, Gift, TrendingUp, ChevronRight, LogOut, Award, HeartPulse, Stethoscope, Pills, Sparkles, Microscope, Coins, CheckCircle2, X, Info, Home, GraduationCap } from 'lucide-react';
 
 const ProfileScreen = ({ onTabChange }) => {
   const [showRedeem, setShowRedeem] = React.useState(false);
   const [conversionCoins, setConversionCoins] = React.useState(1000);
   
   const rewards = [
-    { id: 1, name: 'Sleek Phone Cover', price: 1500, icon: Smartphone, color: '#3498db' },
-    { id: 2, name: 'Premium Stickers', price: 300, icon: Gift, color: '#e74c3c' },
-    { id: 3, name: 'Wireless Buds', price: 5000, icon: Headphones, color: '#2ecc71' },
-    { id: 4, name: 'Emotional Toolkit', price: 1200, icon: HeartPulse, color: '#FF4081' },
+    { id: 1, name: 'Gynec Consultation', price: 2000, icon: Stethoscope, color: '#FF80AB' },
+    { id: 2, name: '20% off Medicines', price: 500, icon: Pills, color: '#4FC3F7' },
+    { id: 3, name: 'Wellness Spa Session', price: 3500, icon: Sparkles, color: '#9575CD' },
+    { id: 4, name: 'Health Diagnostics', price: 4500, icon: Microscope, color: '#81C784' },
   ];
 
   const estimatedCash = (conversionCoins / 100) * 10;
@@ -54,6 +54,17 @@ const ProfileScreen = ({ onTabChange }) => {
               <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Asmita K.</h2>
               <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)' }}>Verified Explorer</p>
             </div>
+          </div>
+
+          {/* Rewards Section (M3 style) */}
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Your Self-Care Corner</h2>
+              <span style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-primary)', fontWeight: 600 }}>Earned: 1,240 🪙</span>
+            </div>
+            <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)', marginBottom: '16px', marginTop: '-12px' }}>
+              Wealth is more than just money. Invest in your wellbeing.
+            </p>
           </div>
 
           {/* Dummy Coins Wallet */}
