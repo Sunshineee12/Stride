@@ -16,7 +16,7 @@ const MentorFAB = () => {
         onClick={() => setIsOpen(true)}
         style={{
           position: 'absolute',
-          bottom: '100px',
+          bottom: '130px',
           right: '20px',
           width: '56px',
           height: '56px',
