@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Lightbulb } from 'lucide-react';
 
 const quotes = [
-  "This is for learning, don't be scared. When you lose, you learn.",
-  "Every small step is a giant stride toward financial confidence.",
-  "The market is your classroom, and every trade is a lesson.",
-  "Wealth isn't just about money; it's about the knowledge you gain.",
-  "Don't fear the fluctuations; embrace the opportunity to grow."
+  "Take a deep breath. You're here to learn, and that's already a win.",
+  "Financial confidence is a journey, not a race. You're doing great.",
+  "It's okay to not know everything. Every expert started where you are.",
+  "Relax. Today is just about one small step toward your future.",
+  "You're in a safe place to grow. Let's explore together."
 ];
 
 const QuoteSplash = ({ onComplete }) => {
