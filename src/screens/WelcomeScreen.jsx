@@ -61,19 +61,6 @@ const WelcomeScreen = ({ onNext }) => {
           Taking your first stride towards financial confidence.
         </motion.p>
       </div>
-
-      {/* Progress Indicator for auto-advance */}
-      <motion.div
-        initial={{ width: 0 }}
-        animate={{ width: '40px' }}
-        transition={{ delay: 1, duration: 1.5 }}
-        style={{ 
-          height: '4px', 
-          backgroundColor: 'var(--md-sys-color-primary)', 
-          borderRadius: '2px',
-          marginBottom: '64px'
-        }}
-      />
     </motion.div>
   );
 };

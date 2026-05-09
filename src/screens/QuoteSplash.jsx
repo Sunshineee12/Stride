@@ -18,10 +18,10 @@ const QuoteSplash = ({ onComplete }) => {
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     setCurrentQuote(randomQuote);
 
-    // Auto-advance after 2 seconds
+    // Auto-advance after 1.5 seconds
     const timer = setTimeout(() => {
       onComplete();
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -33,8 +33,8 @@ const QuoteSplash = ({ onComplete }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       style={{ 
-        backgroundColor: 'var(--md-sys-color-primary)', 
-        color: 'white',
+        backgroundColor: 'var(--md-sys-color-primary-container)', 
+        color: 'var(--md-sys-color-on-primary-container)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -51,7 +51,7 @@ const QuoteSplash = ({ onComplete }) => {
       >
         <div style={{ 
           width: '64px', height: '64px', borderRadius: '20px', 
-          backgroundColor: 'rgba(255,255,255,0.2)', 
+          backgroundColor: 'rgba(255,255,255,0.5)', 
           display: 'flex', alignItems: 'center', justifyContent: 'center'
         }}>
           <Lightbulb size={32} />
@@ -71,18 +71,6 @@ const QuoteSplash = ({ onComplete }) => {
       >
         "{currentQuote}"
       </motion.h2>
-
-      <motion.div 
-        initial={{ width: 0 }}
-        animate={{ width: '100px' }}
-        transition={{ delay: 0.8, duration: 2.5 }}
-        style={{ 
-          height: '4px', 
-          backgroundColor: 'rgba(255,255,255,0.4)', 
-          borderRadius: '2px',
-          marginTop: '40px'
-        }}
-      />
     </motion.div>
   );
 };
