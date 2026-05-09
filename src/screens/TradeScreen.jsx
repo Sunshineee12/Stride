@@ -284,57 +284,56 @@ const TradeScreen = ({ onTabChange }) => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               style={{
-                width: '100%', maxWidth: '340px', backgroundColor: 'var(--md-sys-color-surface)',
-                borderRadius: '32px', padding: '32px 24px', position: 'relative', zIndex: 1001,
-                boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+                width: '100%', maxWidth: '300px', backgroundColor: 'var(--md-sys-color-surface)',
+                borderRadius: '28px', padding: '24px 20px', position: 'relative', zIndex: 1001,
+                boxShadow: '0 12px 32px rgba(0,0,0,0.12)'
               }}
             >
               <button 
                 onClick={() => setShowDailyGoal(false)}
-                style={{ position: 'absolute', top: '16px', right: '16px', color: 'var(--md-sys-color-outline)', border: 'none', background: 'none', cursor: 'pointer' }}
+                style={{ position: 'absolute', top: '12px', right: '12px', color: 'var(--md-sys-color-outline)', border: 'none', background: 'none', cursor: 'pointer' }}
               >
-                <ChevronRight size={24} style={{ rotate: '90deg' }} />
+                <ChevronRight size={20} style={{ rotate: '90deg' }} />
               </button>
 
-              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <div style={{ textAlign: 'center', marginBottom: '16px' }}>
                 <div style={{ 
-                  width: '56px', height: '56px', borderRadius: '16px', 
+                  width: '44px', height: '44px', borderRadius: '12px', 
                   backgroundColor: 'var(--md-sys-color-primary-container)', 
-                  margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--md-sys-color-primary)'
                 }}>
-                  <Target size={28} />
+                  <Target size={22} />
                 </div>
-                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Daily Learning Goal</h2>
-                <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)', marginTop: '8px', lineHeight: 1.5 }}>
-                  The best way to learn is by doing. Even a ₹5 investment today helps you grow.
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Daily Goal</h2>
+                <p style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-on-surface-variant)', marginTop: '4px', lineHeight: 1.4 }}>
+                  Learn by doing. Small steps lead to big results.
                 </p>
               </div>
 
-              <div style={{ marginBottom: '24px' }}>
-                <p style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '12px', color: 'var(--md-sys-color-on-surface-variant)', textAlign: 'center' }}>
-                  Choose your risk level for today
-                </p>
-                <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {[
-                    { id: 'low', label: 'Safe', icon: ShieldCheck, color: '#2E7D32' },
-                    { id: 'med', label: 'Balanced', icon: Info, color: '#F57C00' },
-                    { id: 'high', label: 'Bold', icon: Zap, color: '#C62828' }
+                    { id: 'low', label: 'Safe', icon: ShieldCheck },
+                    { id: 'med', label: 'Balanced', icon: Info },
+                    { id: 'high', label: 'Bold', icon: Zap }
                   ].map(risk => (
                     <button 
                       key={risk.id}
                       onClick={() => setRiskLevel(risk.id)}
                       style={{ 
-                        flex: 1, 
-                        backgroundColor: riskLevel === risk.id ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-surface-container-high)', 
-                        color: riskLevel === risk.id ? 'white' : 'var(--md-sys-color-on-surface-variant)',
-                        border: 'none', borderRadius: '16px', padding: '12px 8px', 
-                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', 
-                        cursor: 'pointer', transition: 'all 0.2s ease'
+                        width: '100%', 
+                        backgroundColor: riskLevel === risk.id ? 'var(--md-sys-color-secondary-container)' : 'transparent', 
+                        color: 'var(--md-sys-color-on-surface)',
+                        border: riskLevel === risk.id ? '1.5px solid var(--md-sys-color-primary)' : '1px solid var(--md-sys-color-outline-variant)',
+                        borderRadius: '12px', padding: '10px 16px', 
+                        display: 'flex', alignItems: 'center', gap: '12px', 
+                        cursor: 'pointer', transition: 'all 0.15s ease'
                       }}
                     >
-                      <risk.icon size={20} color={riskLevel === risk.id ? 'white' : risk.color} />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 700 }}>{risk.label}</span>
+                      <risk.icon size={18} color="var(--md-sys-color-primary)" />
+                      <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>{risk.label}</span>
+                      {riskLevel === risk.id && <div style={{ marginLeft: 'auto', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--md-sys-color-primary)' }} />}
                     </button>
                   ))}
                 </div>
@@ -342,27 +341,27 @@ const TradeScreen = ({ onTabChange }) => {
 
               <div style={{ 
                 backgroundColor: 'var(--md-sys-color-secondary-container)', 
-                borderRadius: '24px', padding: '20px', textAlign: 'center'
+                borderRadius: '20px', padding: '16px', textAlign: 'center'
               }}>
-                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginBottom: '4px' }}>
-                  Our Suggestion
+                <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginBottom: '4px' }}>
+                  Suggestion
                 </p>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)' }}>
                   {suggestions[riskLevel].name}
                 </h3>
-                <p style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.9, marginTop: '4px' }}>
+                <p style={{ fontSize: '0.75rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.9 }}>
                   {suggestions[riskLevel].risk} • {suggestions[riskLevel].price}
                 </p>
                 
                 <button 
                   onClick={() => setShowDailyGoal(false)}
                   style={{ 
-                    marginTop: '16px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-                    width: '100%', padding: '12px', borderRadius: '100px', fontWeight: 600, border: 'none',
+                    marginTop: '12px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+                    width: '100%', padding: '10px', borderRadius: '100px', fontSize: '0.85rem', fontWeight: 600, border: 'none',
                     cursor: 'pointer'
                   }}
                 >
-                  View Details
+                  Get Started
                 </button>
               </div>
             </motion.div>
