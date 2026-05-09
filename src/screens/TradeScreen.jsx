@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { History, TrendingUp, TrendingDown, Home, GraduationCap, User, Search, Filter, Star, Briefcase, ChevronRight, Target, ShieldCheck, Zap, Info } from 'lucide-react';
 
 const TradeScreen = ({ onTabChange }) => {
-  const [activeView, setActiveView] = useState('history'); // history, watchlist, portfolio
+  const [activeView, setActiveView] = useState('portfolio'); // portfolio, watchlist, history
   const [riskLevel, setRiskLevel] = useState('low');
   const [showDailyGoal, setShowDailyGoal] = useState(true);
 
@@ -94,11 +94,11 @@ const TradeScreen = ({ onTabChange }) => {
           </div>
         </div>
 
-        {/* Navigation Tabs (Watchlist, Portfolio, History) */}
+        {/* Navigation Tabs (Portfolio, Watchlist, History) */}
         <div style={{ display: 'flex', padding: '0 20px', gap: '8px', marginBottom: '24px' }}>
           {[
-            { id: 'watchlist', label: 'Watchlist', icon: Star },
             { id: 'portfolio', label: 'Portfolio', icon: Briefcase },
+            { id: 'watchlist', label: 'Watchlist', icon: Star },
             { id: 'history', label: 'History', icon: History }
           ].map(tab => (
             <motion.button
@@ -361,17 +361,7 @@ const TradeScreen = ({ onTabChange }) => {
                     {suggestions[riskLevel].risk}
                   </p>
                 </div>
-                
-                <button 
-                  onClick={() => setShowDailyGoal(false)}
-                  style={{ 
-                    marginTop: '16px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-                    width: '100%', padding: '10px', borderRadius: '100px', fontSize: '0.8rem', fontWeight: 600, border: 'none',
-                    cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-                  }}
-                >
-                  Start Learning
-                </button>
+                </div>
               </div>
             </motion.div>
           </div>

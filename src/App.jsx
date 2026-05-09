@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LearnScreen from './screens/LearnScreen';
 import TradeScreen from './screens/TradeScreen';
+import QuoteSplash from './screens/QuoteSplash';
 import MentorFAB from './components/MentorFAB';
 
 function App() {
@@ -27,7 +28,10 @@ function App() {
   return (
     <AnimatePresence mode="wait">
       {currentScreen === 'welcome' && (
-        <WelcomeScreen key="welcome" onNext={() => navigateTo('experience')} />
+        <WelcomeScreen key="welcome" onNext={() => navigateTo('quote')} />
+      )}
+      {currentScreen === 'quote' && (
+        <QuoteSplash key="quote" onComplete={() => navigateTo('experience')} />
       )}
       {currentScreen === 'experience' && (
         <ExperienceScreen key="experience" onNext={(level) => {
