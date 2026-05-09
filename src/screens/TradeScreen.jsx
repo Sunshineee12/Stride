@@ -5,6 +5,7 @@ import { History, TrendingUp, TrendingDown, Home, GraduationCap, User, Search, F
 const TradeScreen = ({ onTabChange }) => {
   const [activeView, setActiveView] = useState('history'); // history, watchlist, portfolio
   const [riskLevel, setRiskLevel] = useState('low');
+  const [showDailyGoal, setShowDailyGoal] = useState(true);
 
   const suggestions = {
     low: { name: 'NIFTY BEES (ETF)', risk: 'Safe & Steady', price: '₹10', icon: ShieldCheck },
@@ -44,78 +45,25 @@ const TradeScreen = ({ onTabChange }) => {
     >
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '100px' }}>
         {/* Header */}
-        <header style={{ padding: '24px 20px 16px' }}>
-          <h1 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Trade</h1>
-          <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)' }}>Manage your investments and history.</p>
+        <header style={{ padding: '24px 20px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <h1 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Trade</h1>
+            <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)' }}>Manage your investments and history.</p>
+          </div>
+          <button 
+            onClick={() => setShowDailyGoal(true)}
+            style={{ 
+              width: '40px', height: '40px', borderRadius: '12px', 
+              backgroundColor: 'var(--md-sys-color-secondary-container)', 
+              display: 'flex', alignItems: 'center', justifyContent: 'center', 
+              color: 'var(--md-sys-color-on-secondary-container)', border: 'none', cursor: 'pointer'
+            }}
+          >
+            <Target size={20} />
+          </button>
         </header>
 
-        {/* Daily Investment Challenge */}
-        <div style={{ padding: '0 20px 24px' }}>
-          <div style={{ 
-            backgroundColor: 'var(--md-sys-color-secondary-container)', 
-            borderRadius: '28px', padding: '24px',
-            color: 'var(--md-sys-color-on-secondary-container)',
-            position: 'relative', overflow: 'hidden'
-          }}>
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-                <Target size={20} />
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Daily Learning Goal</h2>
-              </div>
-              <p style={{ fontSize: '0.85rem', lineHeight: 1.4, marginBottom: '20px', opacity: 0.9 }}>
-                The best way to learn is by doing. Even a ₹5 or ₹10 investment today helps you understand how the market moves.
-              </p>
-              
-              <p style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '12px', opacity: 0.8 }}>How are you feeling today?</p>
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
-                {[
-                  { id: 'low', label: 'Safe', icon: ShieldCheck, color: '#2E7D32' },
-                  { id: 'med', label: 'Balanced', icon: Info, color: '#F57C00' },
-                  { id: 'high', label: 'Bold', icon: Zap, color: '#C62828' }
-                ].map(risk => (
-                  <button 
-                    key={risk.id}
-                    onClick={() => setRiskLevel(risk.id)}
-                    style={{ 
-                      flex: 1, 
-                      backgroundColor: riskLevel === risk.id ? 'var(--md-sys-color-primary)' : 'rgba(255,255,255,0.4)', 
-                      color: riskLevel === risk.id ? 'white' : 'var(--md-sys-color-on-secondary-container)',
-                      border: '1px solid rgba(0,0,0,0.05)',
-                      borderRadius: '12px', padding: '8px', display: 'flex', flexDirection: 'column', 
-                      alignItems: 'center', gap: '4px', cursor: 'pointer',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <risk.icon size={18} color={riskLevel === risk.id ? 'white' : risk.color} />
-                    <span style={{ fontSize: '0.7rem', fontWeight: 700 }}>{risk.label}</span>
-                  </button>
-                ))}
-              </div>
 
-              <div style={{ 
-                backgroundColor: 'rgba(255,255,255,0.6)', borderRadius: '16px', padding: '16px',
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-              }}>
-                <div>
-                  <p style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '2px' }}>Suggested for you:</p>
-                  <h3 style={{ fontSize: '0.95rem', fontWeight: 800 }}>{suggestions[riskLevel].name}</h3>
-                  <p style={{ fontSize: '0.7rem', opacity: 0.8 }}>{suggestions[riskLevel].risk} • Start with {suggestions[riskLevel].price}</p>
-                </div>
-                <button style={{ 
-                  backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
-                  padding: '8px 16px', borderRadius: '100px', fontSize: '0.8rem', fontWeight: 700, border: 'none'
-                }}>
-                  Try Now
-                </button>
-              </div>
-            </div>
-            {/* Abstract Background Shape */}
-            <div style={{ 
-              position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', 
-              borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)', zIndex: 1 
-            }} />
-          </div>
-        </div>
 
         {/* Search Bar */}
         <div style={{ padding: '0 20px 16px', display: 'flex', gap: '12px' }}>
@@ -317,6 +265,110 @@ const TradeScreen = ({ onTabChange }) => {
           </div>
         ))}
       </div>
+      {/* Daily Learning Goal Modal */}
+      <AnimatePresence>
+        {showDailyGoal && (
+          <div style={{ 
+            position: 'absolute', inset: 0, zIndex: 1000, 
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' 
+          }}>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowDailyGoal(false)}
+              style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(4px)' }}
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              style={{
+                width: '100%', maxWidth: '340px', backgroundColor: 'var(--md-sys-color-surface)',
+                borderRadius: '32px', padding: '32px 24px', position: 'relative', zIndex: 1001,
+                boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+              }}
+            >
+              <button 
+                onClick={() => setShowDailyGoal(false)}
+                style={{ position: 'absolute', top: '16px', right: '16px', color: 'var(--md-sys-color-outline)', border: 'none', background: 'none', cursor: 'pointer' }}
+              >
+                <ChevronRight size={24} style={{ rotate: '90deg' }} />
+              </button>
+
+              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                <div style={{ 
+                  width: '56px', height: '56px', borderRadius: '16px', 
+                  backgroundColor: 'var(--md-sys-color-primary-container)', 
+                  margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: 'var(--md-sys-color-primary)'
+                }}>
+                  <Target size={28} />
+                </div>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>Daily Learning Goal</h2>
+                <p style={{ fontSize: '0.85rem', color: 'var(--md-sys-color-on-surface-variant)', marginTop: '8px', lineHeight: 1.5 }}>
+                  The best way to learn is by doing. Even a ₹5 investment today helps you grow.
+                </p>
+              </div>
+
+              <div style={{ marginBottom: '24px' }}>
+                <p style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '12px', color: 'var(--md-sys-color-on-surface-variant)', textAlign: 'center' }}>
+                  Choose your risk level for today
+                </p>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {[
+                    { id: 'low', label: 'Safe', icon: ShieldCheck, color: '#2E7D32' },
+                    { id: 'med', label: 'Balanced', icon: Info, color: '#F57C00' },
+                    { id: 'high', label: 'Bold', icon: Zap, color: '#C62828' }
+                  ].map(risk => (
+                    <button 
+                      key={risk.id}
+                      onClick={() => setRiskLevel(risk.id)}
+                      style={{ 
+                        flex: 1, 
+                        backgroundColor: riskLevel === risk.id ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-surface-container-high)', 
+                        color: riskLevel === risk.id ? 'white' : 'var(--md-sys-color-on-surface-variant)',
+                        border: 'none', borderRadius: '16px', padding: '12px 8px', 
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', 
+                        cursor: 'pointer', transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <risk.icon size={20} color={riskLevel === risk.id ? 'white' : risk.color} />
+                      <span style={{ fontSize: '0.75rem', fontWeight: 700 }}>{risk.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ 
+                backgroundColor: 'var(--md-sys-color-secondary-container)', 
+                borderRadius: '24px', padding: '20px', textAlign: 'center'
+              }}>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginBottom: '4px' }}>
+                  Our Suggestion
+                </p>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--md-sys-color-on-secondary-container)' }}>
+                  {suggestions[riskLevel].name}
+                </h3>
+                <p style={{ fontSize: '0.8rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.9, marginTop: '4px' }}>
+                  {suggestions[riskLevel].risk} • {suggestions[riskLevel].price}
+                </p>
+                
+                <button 
+                  onClick={() => setShowDailyGoal(false)}
+                  style={{ 
+                    marginTop: '16px', backgroundColor: 'var(--md-sys-color-primary)', color: 'white', 
+                    width: '100%', padding: '12px', borderRadius: '100px', fontWeight: 600, border: 'none',
+                    cursor: 'pointer'
+                  }}
+                >
+                  View Details
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
