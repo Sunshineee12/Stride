@@ -11,19 +11,16 @@ const TradeScreen = ({ onTabChange }) => {
     low: { 
       name: 'NIFTY BEES (ETF)', 
       risk: 'Guaranteed Return', 
-      desc: 'Perfect for beginners. It tracks the top 50 companies in India.',
       icon: ShieldCheck 
     },
     med: { 
       name: 'TATA POWER', 
       risk: 'Balanced Risk', 
-      desc: 'A mix of stability and growth from a trusted energy leader.',
       icon: Info 
     },
     high: { 
       name: 'ZOMATO', 
       risk: 'Higher Risk', 
-      desc: 'Fast-moving stock. Great for learning how price jumps happen.',
       icon: Zap 
     }
   };
@@ -364,9 +361,6 @@ const TradeScreen = ({ onTabChange }) => {
                     {suggestions[riskLevel].risk}
                   </p>
                 </div>
-                <p style={{ fontSize: '0.7rem', color: 'var(--md-sys-color-on-secondary-container)', opacity: 0.8, marginTop: '8px', lineHeight: 1.4 }}>
-                  {suggestions[riskLevel].desc}
-                </p>
                 
                 <button 
                   onClick={() => setShowDailyGoal(false)}
