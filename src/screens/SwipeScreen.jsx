@@ -157,6 +157,16 @@ const SwipeScreen = ({ onComplete, userId, userLevel }) => {
       exit={{ opacity: 0 }}
       style={{ backgroundColor: 'var(--md-sys-color-surface)' }}
     >
+      <div style={{ position: 'absolute', top: '24px', left: '24px', zIndex: 50 }}>
+        <span style={{ 
+          fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', 
+          borderRadius: '100px', backgroundColor: 'var(--md-sys-color-primary-container)',
+          color: 'var(--md-sys-color-on-primary-container)'
+        }}>
+          {CARD_DATA.length - cards.length + (explanation ? 0 : 1)} / {CARD_DATA.length}
+        </span>
+      </div>
+
       <div style={{ position: 'absolute', top: '24px', right: '24px', zIndex: 50 }}>
         <button 
           onClick={() => onComplete(knownItems, true)}
@@ -171,47 +181,13 @@ const SwipeScreen = ({ onComplete, userId, userLevel }) => {
 
       <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '30px' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 500, color: 'var(--md-sys-color-on-surface)' }}>Let's gauge your knowledge</h2>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '8px' }}>
-          <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.9rem' }}>
-            Swipe right if you know it, left if it's new.
-          </p>
-          <span style={{ 
-            fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', 
-            borderRadius: '100px', backgroundColor: 'var(--md-sys-color-primary-container)',
-            color: 'var(--md-sys-color-on-primary-container)'
-          }}>
-            {CARD_DATA.length - cards.length + (explanation ? 0 : 1)} / {CARD_DATA.length}
-          </span>
-        </div>
+        <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: '0.9rem', marginTop: '8px' }}>
+          Swipe right if you know it, left if it's new.
+        </p>
       </div>
 
       <div style={{ position: 'relative', width: '100%', height: '440px', marginTop: '10px' }}>
         <AnimatePresence>
-          {cards.length === 0 && !explanation && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              style={{ 
-                position: 'absolute', inset: 0, display: 'flex', 
-                flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                textAlign: 'center'
-              }}
-            >
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                style={{ fontSize: '3rem', marginBottom: '16px' }}
-              >
-                🎉
-              </motion.div>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--md-sys-color-primary)' }}>
-                Knowledge Goal Met!
-              </h3>
-              <p style={{ color: 'var(--md-sys-color-on-surface-variant)', marginTop: '8px' }}>
-                You're becoming a wiser investor every day.
-              </p>
-            </motion.div>
-          )}
           {cards.map((card, index) => (
             <Card 
               key={card.id} 

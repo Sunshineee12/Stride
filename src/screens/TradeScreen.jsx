@@ -64,8 +64,17 @@ const TradeScreen = ({ onTabChange }) => {
             <motion.div 
               style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginTop: '12px' }}
               onClick={() => setShowDailyGoal(true)}
-              animate={!showDailyGoal ? { scale: [1, 1.05, 1] } : {}}
-              transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                scale: !showDailyGoal ? [1, 1.05, 1] : 1
+              }}
+              transition={{ 
+                opacity: { delay: 1, duration: 0.5 },
+                y: { delay: 1, duration: 0.5 },
+                scale: { repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 1.5 }
+              }}
             >
               <div style={{ 
                 width: '32px', height: '32px', borderRadius: '10px', 

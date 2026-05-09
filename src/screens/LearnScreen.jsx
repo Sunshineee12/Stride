@@ -77,9 +77,17 @@ const LearnScreen = ({ onTabChange }) => {
             }}
           >
             <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', opacity: 0.9 }}>
-                <Trophy size={16} />
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Daily Challenge</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', opacity: 0.9 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Trophy size={16} />
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Daily Challenge</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '40px', height: '4px', backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: '10px', overflow: 'hidden' }}>
+                    <div style={{ width: '60%', height: '100%', backgroundColor: 'white' }} />
+                  </div>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800 }}>3/5</span>
+                </div>
               </div>
               <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '8px' }}>Today's Quick Quiz</h2>
               <p style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '20px', maxWidth: '200px' }}>
