@@ -37,12 +37,10 @@ const HomeScreen = ({ userKnowledge, onTabChange }) => {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ 
-              width: '40px', height: '40px', 
-              backgroundColor: 'var(--md-sys-color-primary-container)', 
-              borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', 
-              color: 'var(--md-sys-color-on-primary-container)' 
+              width: '32px', height: '32px', 
+              display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}>
-              <TrendingUp size={20} />
+              <img src="/Stride/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <h1 style={{ 
               fontSize: '1.1rem', 
