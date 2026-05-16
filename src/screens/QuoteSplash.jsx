@@ -71,15 +71,6 @@ const QuoteSplash = ({ onComplete }) => {
       >
         "{currentQuote}"
       </motion.h2>
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 1 }}
-        style={{ position: 'absolute', bottom: '60px' }}
-      >
-        <img src="/Stride/logo.png" alt="Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-      </motion.div>
     </motion.div>
   );
 };

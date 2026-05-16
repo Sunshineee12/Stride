@@ -77,10 +77,12 @@ const TradeScreen = ({ onTabChange }) => {
               }}
             >
               <div style={{ 
-                width: '32px', height: '32px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center'
+                width: '32px', height: '32px', borderRadius: '10px', 
+                backgroundColor: 'var(--md-sys-color-primary-container)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--md-sys-color-primary)'
               }}>
-                <img src="/Stride/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                <Target size={18} />
               </div>
               <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--md-sys-color-primary)' }}>Daily Goal</span>
             </motion.div>

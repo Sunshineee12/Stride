@@ -26,17 +26,14 @@ const WelcomeScreen = ({ onNext }) => {
           transition={{ delay: 0.3, duration: 0.6, type: 'spring' }}
           style={{ 
             marginBottom: '32px', 
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
+            background: 'var(--md-sys-color-primary-container)', 
+            padding: '24px', 
+            borderRadius: '28px', 
+            color: 'var(--md-sys-color-on-primary-container)',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
           }}
         >
-          <img 
-            src="/Stride/logo.png" 
-            alt="Stride Logo" 
-            style={{ width: '120px', height: '120px', objectFit: 'contain' }} 
-            onError={(e) => { e.target.src = 'https://api.iconify.design/lucide:trending-up.svg?color=%236750a4'; }}
-          />
+          <TrendingUp size={48} strokeWidth={2.5} />
         </motion.div>
         
         <motion.h1 
